@@ -14,8 +14,8 @@ public class Monitor {
         System.out.println("el hilo " + Thread.currentThread() + " solicita llave");
 
 
-        while (mutex.availablePermits()!= 0) {
-            mutex.acquire();
+        if (mutex.availablePermits()!= 0) {
+            mutex.tryAcquire();
             System.out.println("el hilo " + Thread.currentThread() + " se lleva la llave");
             //Thread.sleep(5000);
             // wait();
@@ -23,22 +23,24 @@ public class Monitor {
              mutex.release();
             System.out.println("el hilo " + Thread.currentThread() + " devolvi la llave");
             notifyAll();
+            wait();
+
         }
-
-        //mutex.availablePermits()== 0)
+    else {
+            //mutex.availablePermits()== 0)
             System.out.println(Thread.currentThread() + " me quede sin llave");
-             //Thread.sleep(3000);
-             wait();
-
+            //Thread.sleep(3000);
+            wait();
+        }
     }
 
 
     public void haceralgo(){
         System.out.println("El hilo " + Thread.currentThread() + " esta en el metodo hacer algo");
         try {
-           Thread.sleep(5000);
+          // Thread.sleep(5000);
           // notifyAll();
-           // wait();
+            wait(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
