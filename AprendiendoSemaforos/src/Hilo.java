@@ -1,11 +1,12 @@
 import java.util.concurrent.Semaphore;
-
+import java.util.Random;
 public class Hilo extends Thread {
 
     Semaforo semaforo;
     String name;
     boolean puedoEntrar;
     Monitor monitor;
+    Random random = new Random();
 
         public Hilo(Monitor monitor){
             this.monitor=monitor;
@@ -19,6 +20,10 @@ public class Hilo extends Thread {
 
             try {
                 monitor.entrar();
+                int valorEntero = Math.abs(random.nextInt(3));
+                System.out.print(valorEntero);
+
+                sleep(valorEntero *1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 System.err.println("entre al catch");
