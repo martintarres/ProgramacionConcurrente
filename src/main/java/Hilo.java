@@ -1,11 +1,15 @@
+import java.util.List;
+
 public class Hilo extends Thread {
 
   private String nombre;
   private Monitor monitor;
+  private List<Integer> enteros;
 
-  public Hilo(String nombre, Monitor monitor){
+  public Hilo(String nombre, List <Integer> enteros, Monitor monitor){
     this.nombre = nombre;
     this.monitor = monitor;
+    this.enteros=enteros;
   }
 
   public String getNombre(){
@@ -14,7 +18,11 @@ public class Hilo extends Thread {
 
   public void run(){
     System.out.println("Soy hilo "+ nombre);
-    monitor.dispararTransicion(this,10);
+    for(Integer i : enteros)
+    {
+      monitor.dispararTransicion(i.intValue());
+    }
+
 
 
   }

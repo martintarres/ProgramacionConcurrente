@@ -13,7 +13,7 @@ public class Colas {
 
 
     public void encolar(Thread aEncolar){
-
+        System.out.println("encole el hilo " + aEncolar.getName());
         listaHilos.add(aEncolar);
 
     }
