@@ -50,7 +50,7 @@ public class RdP{
         throw new RdPException("Transicion no valida.");
       }
       this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
-      vectorSensibilizadas = RdP.Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
+      vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
       vectorSensibilizadas.imprimir();
     }
 
@@ -91,6 +91,11 @@ public class RdP{
     }
 
 
+  }
+
+  public Matriz getVectorSensibilizadas(){
+    return vectorSensibilizadas;
+    //return null;
   }
 
 //Algunas noches, soy facil, uoooo uooooo

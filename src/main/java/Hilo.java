@@ -17,14 +17,16 @@ public class Hilo extends Thread {
   }
 
   public void run(){
-    System.out.println("Soy hilo "+ nombre);
+   // System.out.println("Soy hilo "+ nombre);
     for(Integer i : enteros)
     {
       monitor.dispararTransicion(i.intValue());
     }
 
+  }
 
-
+  public List<Integer> getTransiciones(){
+      return enteros;
   }
 
 

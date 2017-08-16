@@ -8,8 +8,6 @@ public class Principal {
         Constantes constantes= new Constantes();
         Monitor monitor= new Monitor(constantes);
 
-
-
         List<Integer> l1= new ArrayList<Integer>();
         List<Integer> l2= new ArrayList<Integer>();
         List<Integer> l3= new ArrayList<Integer>();
@@ -26,9 +24,14 @@ public class Principal {
         Hilo h2 = new Hilo("Hilo 2",l2, monitor);
         Hilo h3 = new Hilo("Hilo 3",l3, monitor);
 
+        monitor.setHilos(h1);
+        monitor.setHilos(h2);
+        monitor.setHilos(h3);
+
         h1.start();
         h2.start();
         h3.start();
+
 
 
 

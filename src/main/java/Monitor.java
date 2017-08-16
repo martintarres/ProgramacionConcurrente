@@ -7,6 +7,7 @@ public class Monitor{
   private Semaphore mutex;
   private boolean k;
   private RdP petri;
+  private List<Hilo> listaHilos;
   //private Constantes constantes;
 
   public Monitor(Constantes constantes) {
@@ -15,12 +16,12 @@ public class Monitor{
     k=true;
     //constantes = new Constantes();
     petri = new RdP(constantes.marcadoInicial, constantes.incidenciaPrevia, constantes.incidenciaPosterior);
-
+    listaHilos= new ArrayList <Hilo>();
   }
 
   public void dispararTransicion(int transicion)  {
 
-    System.out.println("el hilo " + Thread.currentThread() + " solicita disparar" + transicion);
+    System.out.println("el hilo " + Thread.currentThread() + " solicita disparar " + transicion);
     as(transicion);
     System.out.println("volvi");
   }
@@ -41,7 +42,9 @@ public class Monitor{
           System.out.println("Transiciones sensibilizadas");
            // petri.Sensibilizadas(petri.getIncidenciaPrevia(),petri.marcadoActual()).imprimir();
            // System.out.println(petri.sensibilizadas());
-            wait();
+          getHilos();
+          saber();
+          wait();
 
 
 
@@ -63,7 +66,7 @@ public class Monitor{
 
 
       try {
-        System.out.println("el hilo " + Thread.currentThread() + " se queda sin llave");
+      //  System.out.println("el hilo " + Thread.currentThread() + " se queda sin llave");
         wait();
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -71,5 +74,25 @@ public class Monitor{
 
     }
   }
+
+  public void setHilos(Hilo hilo){
+      listaHilos.add(hilo);
+  }
+
+  public void getHilos(){
+
+    System.out.println("voy a mostrar todos los hilos del programa");
+    for(Hilo t : listaHilos){
+       // System.out.println("soy hilo " + t.getNombre());
+        System.out.println("soy transiciones del hilo " + t.getNombre()+ t.getTransiciones());
+    }
+  }
+
+  public void saber(){
+    System.out.println("soy saber");
+      petri.getVectorSensibilizadas().imprimir();
+
+  }
+
 
 }
