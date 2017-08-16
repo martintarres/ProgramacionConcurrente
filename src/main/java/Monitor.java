@@ -1,5 +1,7 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.concurrent.Semaphore;
 
 public class Monitor{
@@ -8,6 +10,7 @@ public class Monitor{
   private boolean k;
   private RdP petri;
   private List<Hilo> listaHilos;
+  private Map<Integer,Hilo> mapa;
   //private Constantes constantes;
 
   public Monitor(Constantes constantes) {
@@ -17,6 +20,7 @@ public class Monitor{
     //constantes = new Constantes();
     petri = new RdP(constantes.marcadoInicial, constantes.incidenciaPrevia, constantes.incidenciaPosterior);
     listaHilos= new ArrayList <Hilo>();
+    mapa = new HashMap<Integer,Hilo>();
   }
 
   public void dispararTransicion(int transicion)  {
@@ -92,6 +96,18 @@ public class Monitor{
     System.out.println("soy saber");
       petri.getVectorSensibilizadas().imprimir();
 
+  }
+  public void mapeo(Hilo hilo){
+    for(Integer i: hilo.getTransiciones()){
+      this.mapa.put(i,hilo);
+    }
+  }
+  public void showMapa(){
+    System.out.println("Mapa de Transiciones e Hilos");
+    for(Integer i : this.mapa.keySet())
+    {
+      System.out.println("Transicion " + i + " correspondiente al hilo  "+ this.mapa.get(i).getNombre());
+    }
   }
 
 
