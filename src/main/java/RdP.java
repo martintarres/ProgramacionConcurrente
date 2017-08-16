@@ -42,12 +42,16 @@ public class RdP{
   public Matriz marcadoActual(){
     return this.marcadoActual;
   }
+
+
   public void disparar(int x) throws RdPException{
     try{
       if(x<0||x>this.incidencia.getMatriz()[0].length){
         throw new RdPException("Transicion no valida.");
       }
       this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
+      vectorSensibilizadas = RdP.Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
+      vectorSensibilizadas.imprimir();
     }
 
     catch(Exception e)
