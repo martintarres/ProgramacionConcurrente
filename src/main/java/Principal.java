@@ -20,9 +20,14 @@ public class Principal {
         l2.add(constantes.t24);
 
 
+
         Hilo h1 = new Hilo("Hilo 1",l1, monitor);
         Hilo h2 = new Hilo("Hilo 2",l2, monitor);
         Hilo h3 = new Hilo("Hilo 3",l3, monitor);
+        monitor.mapeo(h1);
+        monitor.mapeo(h2);
+        monitor.mapeo(h3);
+        monitor.showMapa();
 
         monitor.setHilos(h1);
         monitor.setHilos(h2);
