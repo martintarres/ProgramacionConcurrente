@@ -91,7 +91,7 @@ public class Monitor{
     int [][] array = petri.getVectorSensibilizadas().getMatriz();
     for(int i=0;i<petri.getVectorSensibilizadas().getN();i++){
       if(array[0][i]!=0){
-        if(mapa.contains(i)&&!lista.contains(mapa.get(i))){
+        if(mapa.containsKey(i)&&!lista.contains(mapa.get(i))){
           lista.add(mapa.get(i));
         }
       }
