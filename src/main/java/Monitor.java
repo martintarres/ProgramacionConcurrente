@@ -45,6 +45,7 @@ public class Monitor{
           System.out.println("El hilo " + Thread.currentThread() + " trata de disparar la transicion");
           k = petri.disparar(transicion);
           if(k){
+            List<Hilos> hilosSensibilizados = getHilosSensibilizados();
           // bloque Alt k == true
 
           }
@@ -84,6 +85,18 @@ public class Monitor{
 
   public void setHilos(Hilo hilo){
       listaHilos.add(hilo);
+  }
+  public List<Hilos> getHilosSensibilizados(){
+    List<Hilo> lista = new ArrayList<Hilo>();
+    int [][] array = petri.getVectorSensibilizadas().getMatriz();
+    for(int i=0;i<petri.getVectorSensibilizadas().getN();i++){
+      if(array[0][i]!=0){
+        if(mapa.contains(i)&&!lista.contains(mapa.get(i))){
+          lista.add(mapa.get(i));
+        }
+      }
+    }
+    return lista;
   }
 
   public void getHilos(){
