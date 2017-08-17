@@ -4,25 +4,33 @@ import java.util.concurrent.Semaphore;
 
 public class Colas {
 
-    public ArrayList <Thread> listaHilos;
+    public ArrayList <Hilo> listaHilos;
 
 
     public Colas () {
-        listaHilos= new ArrayList <Thread>();
+        listaHilos= new ArrayList <Hilo>();
     }
 
 
-    public void encolar(Thread aEncolar){
+    public void encolar(Hilo aEncolar){
+        System.out.println("me llego " + aEncolar );
         System.out.println("encole el hilo " + aEncolar.getName());
         listaHilos.add(aEncolar);
+        try {
+           aEncolar.wait();
+        } catch (Exception e) {
+            System.out.println("el hilo " + Thread.currentThread() + "esta vivo " + Thread.currentThread().isAlive());
+            System.err.println("entre al catch de encolar");
+            //e.printStackTrace();
+        }
 
     }
 
 
-    public List <Thread> quienesEstan(){
+    public List <Hilo> quienesEstan(){
         int i=0;
         i= listaHilos.size();
-        List <Thread> listaQuienesEstan = new ArrayList <Thread>();
+        List <Hilo> listaQuienesEstan = new ArrayList <Hilo>();
         for (int j=0; j<i; j++){
             listaQuienesEstan.add(listaHilos.get(j));
             System.out.println("Estos son los hilos que devuelvo: " + listaHilos.get(j).getName());
@@ -31,10 +39,10 @@ public class Colas {
         return listaQuienesEstan;
     }
 
-    public Thread desencolar(){
+    public Hilo desencolar(){
         int i=0;
         i=listaHilos.size();
-        Thread hiloADevolver;
+        Hilo hiloADevolver;
         //System.out.println("Muestro el elemento 0 " + listaHilos.get(0).getName());
         //System.out.println("lo borro");
         hiloADevolver= listaHilos.get(0);
@@ -46,8 +54,21 @@ public class Colas {
 
     public static void main(String[] args){
 
-        Thread h1= new Thread();
-        Thread h2 = new Thread();
+        Constantes constantes= new Constantes();
+        Monitor monitor= new Monitor(constantes);
+
+        List<Integer> l1= new ArrayList<Integer>();
+        List<Integer> l2= new ArrayList<Integer>();
+
+        l1.add(constantes.t21);
+        l1.add(constantes.t22);
+
+
+        l2.add(constantes.t23);
+        l2.add(constantes.t24);
+
+        Hilo h1 = new Hilo("Hilo 1",l1, monitor);
+        Hilo h2 = new Hilo("Hilo 2",l2, monitor);
 
         h1.setName("hilo 1");
         h2.setName("hilo 2");

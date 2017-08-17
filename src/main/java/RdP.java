@@ -49,7 +49,7 @@ public class RdP{
       if(x<0||x>this.incidencia.getMatriz()[0].length){
         throw new RdPException("Transicion no valida.");
       }
-      if(this.vectorSensibilizadas.getMatriz()[x]!=0){
+      if(this.vectorSensibilizadas.getMatriz()[0][x]!=0){
         this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
         vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
         vectorSensibilizadas.imprimir();
