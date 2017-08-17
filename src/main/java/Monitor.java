@@ -32,26 +32,29 @@ public class Monitor{
 
 
   public synchronized void as(int transicion) {
+    //es necesario el if si solo entra uno??
     if (mutex.availablePermits() != 0) {
 
       try {
 
         mutex.acquire();
-        System.out.println("el hilo " + Thread.currentThread() + " disparo transicion");
+
         k=true;
 
         while(k){
+          System.out.println("El hilo " + Thread.currentThread() + " trata de disparar la transicion");
+          k = petri.disparar(transicion);
+          if(k){
+          // bloque Alt k == true
 
-            petri.disparar(transicion);
-          System.out.println("Transiciones sensibilizadas");
+          }
+          else{
+            mutex.release();
+            // Encolar y dormir el hilo actual
+          }
+
            // petri.Sensibilizadas(petri.getIncidenciaPrevia(),petri.marcadoActual()).imprimir();
            // System.out.println(petri.sensibilizadas());
-          getHilos();
-          saber();
-          wait();
-
-
-
         }
 
      /*/////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,13 +71,13 @@ public class Monitor{
 
     } else {
 
-
+      /*
       try {
       //  System.out.println("el hilo " + Thread.currentThread() + " se queda sin llave");
         wait();
       } catch (InterruptedException e) {
         e.printStackTrace();
-      }
+      }*/
 
     }
   }

@@ -32,7 +32,7 @@ public class RdP{
   public Matriz getIncidenciaPrevia(){
     return this.incidenciaPrevia;
   }
-  
+
   public List<Integer> sensibilizadas(){
     return null;
   }
@@ -44,14 +44,21 @@ public class RdP{
   }
 
 
-  public void disparar(int x) throws RdPException{
+  public boolean disparar(int x) throws RdPException{
     try{
       if(x<0||x>this.incidencia.getMatriz()[0].length){
         throw new RdPException("Transicion no valida.");
       }
-      this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
-      vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
-      vectorSensibilizadas.imprimir();
+      if(this.vectorSensibilizadas.getMatriz()[x]!=0){
+        this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
+        vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
+        vectorSensibilizadas.imprimir();
+        return true;
+      }
+      else{
+        return false;
+      }
+
     }
 
     catch(Exception e)
