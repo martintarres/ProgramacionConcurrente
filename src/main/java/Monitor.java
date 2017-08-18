@@ -73,6 +73,9 @@ public class Monitor{
             if(Vc.isEmpty()){
               m=0;
             }
+            else{
+              m=1;
+            }
 
             System.out.println("soy m " + m );
 
@@ -83,6 +86,7 @@ public class Monitor{
                 if (j.equals(i)) {
                   m++;
                   estaEnAmbas.add(i);
+                  System.out.println("el hilo " + i.getName()+ " esta en ambas colas");
                 }
               }
             }
@@ -92,6 +96,7 @@ public class Monitor{
               //aca deberiamos ver en las politicas
 
               hiloDesencolado=colas.desencolar();
+              System.out.println("desecole el hilo " + hiloDesencolado.getName());
               notify();
 
               //aca apararece un relase() hacia colas que no sabemos que es
@@ -104,10 +109,10 @@ public class Monitor{
           }
 
           mutex.release();
-          System.out.println("voy a llamar a encolar con " + Thread.currentThread());
+          //System.out.println("voy a llamar a encolar con " + Thread.currentThread());
           colas.encolar((Hilo) Thread.currentThread());
-
-          //wait();
+          notifyAll();
+          wait();
 
 
 
@@ -118,7 +123,7 @@ public class Monitor{
 
 
       } catch (Exception e) {
-
+    System.err.println("dtrdrt");
       }
 
     }

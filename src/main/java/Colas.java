@@ -16,13 +16,13 @@ public class Colas {
         System.out.println("me llego " + aEncolar );
         System.out.println("encole el hilo " + aEncolar.getName());
         listaHilos.add(aEncolar);
-        try {
+       /* try {
            aEncolar.wait();
         } catch (Exception e) {
             System.out.println("el hilo " + Thread.currentThread() + "esta vivo " + Thread.currentThread().isAlive());
             System.err.println("entre al catch de encolar");
             //e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -33,7 +33,7 @@ public class Colas {
         List <Hilo> listaQuienesEstan = new ArrayList <Hilo>();
         for (int j=0; j<i; j++){
             listaQuienesEstan.add(listaHilos.get(j));
-            System.out.println("Estos son los hilos que devuelvo: " + listaHilos.get(j).getName());
+            System.out.println("Estos son los hilos que estan en la cola: " + listaHilos.get(j).getName());
             //System.out.println("Voy a mostrar lo que encolo");
         }
         return listaQuienesEstan;

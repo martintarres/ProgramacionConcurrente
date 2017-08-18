@@ -46,16 +46,21 @@ public class RdP{
 
   public boolean disparar(int x) throws RdPException{
     try{
+
       if(x<0||x>this.incidencia.getMatriz()[0].length){
         throw new RdPException("Transicion no valida.");
       }
       if(this.vectorSensibilizadas.getMatriz()[0][x]!=0){
         this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
         vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
+        System.out.println("el hilo " + Thread.currentThread()+ " disparo " + x);
         vectorSensibilizadas.imprimir();
         return true;
       }
       else{
+        System.out.println("el hilo " + Thread.currentThread()+ " no pudo disparar " + x);
+        System.out.println("no pude disparar por no estar sensibilizada, queda igual");
+        vectorSensibilizadas.imprimir();
         return false;
       }
 
