@@ -20,10 +20,14 @@ public class Hilo extends Thread {
 
   public void run(){
     try{
-      for(Integer i : enteros)
-      {
-        monitor.dispararTransicion(i.intValue());
+      while(true){
+        for(Integer i : enteros)
+        {
+          monitor.dispararTransicion(i.intValue());
+        }
+
       }
+
     }catch(Exception e){
       System.err.println(e.getMessage());
     }
