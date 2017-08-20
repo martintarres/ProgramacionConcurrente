@@ -2,11 +2,13 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 
 public class Monitor{
-
-  private Semaphore mutex;
+  CountDownLatch contador;
+  private Semaforo mutex;
+  //private Semaphore mutex;
   private boolean k;
   private RdP petri;
   private List<Hilo> listaHilos;
@@ -18,10 +20,12 @@ public class Monitor{
   private Colas colas;
   private int m;
   private Hilo hiloDesencolado;
+  //private List<Object>
 
   public Monitor(Constantes constantes) {
-
-    mutex = new Semaphore(1, true);
+    contador = new CountDownLatch(2);
+    //mutex = new Semaphore(1, true);
+    mutex = new Semaforo(1,true);
     k=true;
     //constantes = new Constantes();
     petri = new RdP(constantes.marcadoInicial, constantes.incidenciaPrevia, constantes.incidenciaPosterior);
@@ -35,167 +39,156 @@ public class Monitor{
   }
 
   public void dispararTransicion(int transicion)  {
-
-    System.out.println("el hilo " + Thread.currentThread() + " solicita disparar " + transicion);
-    as(transicion);
-    System.out.println("volvi");
-
-  }
+    try{
 
 
-  public synchronized void as(int transicion) {
+      System.out.println(Thread.currentThread() + " solicita disparar " + transicion);
+      //contador.countDown();
+      //contador.await();
 
-    if(mutex.availablePermits() !=0) {
+      //for(Hilo h : mapa.values()){
+        //System.out.println( Thread.currentThread()+ " ---- " + h + " esta : " + h.getState());
+      //}
+      as(transicion);
+      System.out.println( Thread.currentThread() + " volvio de  disparar " + transicion);
 
-      System.out.println("entre a available " + Thread.currentThread());
-
-      try {
-
-        mutex.acquire();   // Pido el mutex
-        k=true;
-
-        while(k==true){     // Si k es true
-
-          k=petri.disparar(transicion);   // Disparo la transicion
-
-          if(k==true){
-
-            System.out.println("voy a mostrar hilos sensiblizados " + getHilosSensibilizados());
-
-            Vs=getHilosSensibilizados();    // armo la lista de hilos sensibilizados
-
-            //System.out.println("Voy a preguntar quienes estan en la cola");
-            // colas.encolar((Hilo) Hilo.currentThread());
-            // System.out.println(colas.quienesEstan());
-
-            Vc=colas.quienesEstan();      // armo la lista de hilos encolados sensibilizados
-
-            if(Vc.isEmpty()){
-              m=0;
-            }
-            else{
-              m=1;
-            }
-
-            System.out.println("soy m " + m );
-
-          /*Esto es para ver si hay algun hilo que este en las dos listas */
-
-            for(Hilo j : Vc) {
-              for (Hilo i : Vs) {
-                if (j.equals(i)) {
-                  m++;
-                  estaEnAmbas.add(i);
-                  System.out.println("el hilo " + i.getName()+ " esta en ambas colas");
-                }
-              }
-            }
-
-            if(m != 0){                 /// vamos a hacer la parte del m
-
-              //aca deberiamos ver en las politicas
-
-              hiloDesencolado=colas.desencolar();
-              System.out.println("desecole el hilo " + hiloDesencolado.getName());
-              notify();
-
-              //aca apararece un relase() hacia colas que no sabemos que es
-
-            }else{
-
-              k=false;
-            }
-
-          }
-
-          mutex.release();
-          //System.out.println("voy a llamar a encolar con " + Thread.currentThread());
-          colas.encolar((Hilo) Thread.currentThread());
-          notifyAll();
-          wait();
-
-
-
-        }
-
-
-
-
-
-      } catch (Exception e) {
-    System.err.println("dtrdrt");
-      }
+    }
+    catch(Exception e ){
+      System.err.println(e.getMessage());
 
     }
 
-  /*  //es necesario el if si solo entra uno??
-    if (mutex.availablePermits() != 0) {
-
-      try {
-
-        mutex.acquire();
-
-        k=true;
-
-        while(k){
-          System.out.println("El hilo " + Thread.currentThread() + " trata de disparar la transicion");
-          System.out.println("voy a mostrar hilos sensiblizados " + getHilosSensibilizados());
-          k = petri.disparar(transicion);
-          System.out.println("primero");
-          System.out.println("voy a mostrar hilos sensiblizados " + getHilosSensibilizados());
-          k = petri.disparar(transicion);
-          System.out.println("segundo");
-          System.out.println("voy a mostrar hilos sensiblizados " + getHilosSensibilizados());
-          k = petri.disparar(transicion);
-          System.out.println("tercero");
-          System.out.println("voy a mostrar hilos sensiblizados " + getHilosSensibilizados());
-          k = petri.disparar(transicion);
-          k = petri.disparar(transicion);
-          k = petri.disparar(transicion);
-          System.out.println("cuarto");
-          System.out.println("voy a mostrar hilos sensiblizados " + getHilosSensibilizados());
 
 
-          if(k){
-            //List<Hilo> hilosSensibilizados = getHilosSensibilizados();
-          // bloque Alt k == true
-
-
-          }
-          else{
-            mutex.release();
-
-            // Encolar y dormir el hilo actual
-          }
-
-           // petri.Sensibilizadas(petri.getIncidenciaPrevia(),petri.marcadoActual()).imprimir();
-           // System.out.println(petri.sensibilizadas());
-        }
-*/
-     /*/////////////////////////////////////////////////////////////////////////////////////////////
-        wait(5000);
-        notifyAll();
-        System.out.println("el hilo " + Thread.currentThread() + " devuelvo la  llave");
-        mutex.release();
-    //////////////////////////////////////////////////////////////////////////////////////////////*/
-      /*  notifyAll();
-      } catch (Exception e) {
-
-      }
-
-
-    } else {
-
-
-      try {
-      //  System.out.println("el hilo " + Thread.currentThread() + " se queda sin llave");
-        wait();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-
-    }*/
   }
+
+
+
+
+  public   void as(int transicion) {
+    // NO SÉ SI ERA NECESARIO EL SYNCHRONIZED, EL MUTEX MISMO MANEJA LA SINCRONIZACION
+    //synchronized (mutex) {
+
+
+      try {
+
+
+        System.out.println("El hilo " + Thread.currentThread() + " pide  el mutex");
+
+        mutex.acquire();   // Pido el mutex
+        // MANDO A DORMIR UN RATO AL HIJO DE PUTA PORQUE EL SCHEDULER DE JAVA NO CORRE EL OTRO
+
+          Thread.currentThread().sleep(1000);
+          System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
+          System.out.println("Threads  esperando por  el mutex  " +  mutex.getQueue());
+          System.out.println("Estado de los Hilos: ");
+
+          //ACÀ SI SE VA A MOSTAR QUE EL OTRO FORRO SE BLOQUEO AL LLAMAR AL MUTEX
+          for (Hilo h : mapa.values()) {
+              System.out.println(h + " esta : " + h.getState());
+          }
+
+
+
+        k = true;
+
+        while (k == true) {     // Si k es true
+            //Thread.currentThread().sleep(500);
+            k = petri.disparar(transicion);   // Disparo la transicion
+
+          if (k == true) {
+            /*System.out.println("Estado de los Thread: ");
+            for (Hilo h : mapa.values()) {
+              System.out.println(h + " esta : " + h.getState());
+            }*/
+
+            Vs = getHilosSensibilizados();    // armo la lista de hilos sensibilizados
+            for(Hilo h : Vs){
+              System.out.println("Hilos sensibilizados : " + h);
+            }
+            //Vc = mutex.getQueue();      // armo la lista de hilos encolados sensibilizados
+
+            System.out.println("Hilos encolados : "+ Vc);
+            estaEnAmbas.clear();
+            estaEnAmbas = and();
+            System.out.println("Hilos que estan en ambas "+ estaEnAmbas);
+
+            // ACA DEBERIA HABER UNA POLITICA PARA CAMBIAR EL ORDEN DE LA LISTA DEL MUTEX
+
+            if (estaEnAmbas.size()!=0) {
+              //aca deberiamos ver en las politicas
+                //Que recoja el primero encolado
+
+
+                synchronized(estaEnAmbas.get(0).getLock()){
+                    Hilo desencolado = estaEnAmbas.get(0);
+
+                    Vc.remove(desencolado);
+
+                    //k=false;
+                    //Vc.add((Hilo) Thread.currentThread());
+
+                    desencolado.getLock().notify();
+                    break;
+                    //((Hilo) Thread.currentThread()).getLock().wait();
+                    //break;
+
+                    //Vc.add((Hilo)Thread.currentThread());
+
+                }
+                //estaEnAmbas.get(0).getLock().notify();
+
+
+              //Vc.remove((Hilo)Thread.currentThread());
+
+              //mutex.release();
+
+            } else {
+
+              k = false;
+            }
+
+          } else {
+            System.out.println(Thread.currentThread() + " devuelve el mutex");
+
+              Vc.add((Hilo) Thread.currentThread());
+              System.out.println("Hilos encolados: " + Vc);
+              mutex.release();
+              //Thread.currentThread().sleep(100);
+
+            //LO MANDO A DORMIR CON SU PROPIO OBJECT
+              synchronized(((Hilo) Thread.currentThread()).getLock()){
+                  ((Hilo) Thread.currentThread()).getLock().wait();
+
+              }
+            /*if(mutex.availablePermits()==1){
+                mutex.acquire(2);
+            }
+            else{
+                mutex.acquire();
+            }*/
+          }
+
+
+        }
+        System.out.println(Thread.currentThread() + "sale del Monitor");
+        if(k){
+          System.out.println("Sale sin devolver mutex");
+
+        }
+        else{
+          System.out.println("Sale devolviendo mutex");
+          mutex.release();
+        }
+
+
+      } catch (Exception e) {
+        System.err.println(e.getMessage() + "laralara");
+      }
+    //}
+  }
+
+
 
   public void setHilos(Hilo hilo){
       listaHilos.add(hilo);
@@ -240,6 +233,24 @@ public class Monitor{
     for(Integer i : this.mapa.keySet())
     {
       System.out.println("Transicion " + i + " correspondiente al hilo  "+ this.mapa.get(i));
+    }
+  }
+  public List<Hilo> and(){
+    List<Hilo> and = new ArrayList<Hilo>();
+    try{
+      for(Hilo s : Vs){
+        for(Hilo c : Vc){
+          if(s.equals(c)&&!(and.contains(s))){
+            and.add(s);
+
+          }
+        }
+      }
+      return and;
+
+    }
+    catch(Exception e){
+      return  new ArrayList<Hilo>();
     }
   }
 

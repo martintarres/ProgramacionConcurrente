@@ -11,7 +11,7 @@ public class Principal {
         List<Integer> l1= new ArrayList<Integer>();
         List<Integer> l2= new ArrayList<Integer>();
         List<Integer> l3= new ArrayList<Integer>();
-
+        //l1.add(constantes.t13);
         l1.add(constantes.t21);
         l1.add(constantes.t22);
 
@@ -23,20 +23,20 @@ public class Principal {
 
         Hilo h1 = new Hilo("Hilo 1",l1, monitor);
         Hilo h2 = new Hilo("Hilo 2",l2, monitor);
-        Hilo h3 = new Hilo("Hilo 3",l3, monitor);
+        //Hilo h3 = new Hilo("Hilo 3",l3, monitor);
 
         monitor.mapeo(h1);
         monitor.mapeo(h2);
-        monitor.mapeo(h3);
+        //monitor.mapeo(h3);
         monitor.showMapa();
 
         monitor.setHilos(h1);
         monitor.setHilos(h2);
-        monitor.setHilos(h3);
+        //monitor.setHilos(h3);
 
         h1.start();
         h2.start();
-        h3.start();
+        //h3.start();
 
 
 

@@ -12,9 +12,9 @@ public class Colas {
     }
 
 
-    public void encolar(Hilo aEncolar){
-        System.out.println("me llego " + aEncolar );
-        System.out.println("encole el hilo " + aEncolar.getName());
+    public  void encolar(Hilo aEncolar){
+        //System.out.println("me llego " + aEncolar );
+        System.out.println("Encolando " + aEncolar);
         listaHilos.add(aEncolar);
        /* try {
            aEncolar.wait();
