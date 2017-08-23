@@ -30,9 +30,6 @@ public class Principal {
         //monitor.mapeo(h3);
         monitor.showMapa();
 
-        monitor.setHilos(h1);
-        monitor.setHilos(h2);
-        //monitor.setHilos(h3);
 
         h1.start();
         h2.start();
