@@ -129,7 +129,7 @@ public class Monitor{
                     //Vc.add((Hilo) Thread.currentThread());
 
                     desencolado.getLock().notify();
-                    break;
+                    return ;
                     //((Hilo) Thread.currentThread()).getLock().wait();
                     //break;
 
@@ -172,14 +172,8 @@ public class Monitor{
 
         }
         System.out.println(Thread.currentThread() + "sale del Monitor");
-        if(k){
-          System.out.println("Sale sin devolver mutex");
 
-        }
-        else{
-          System.out.println("Sale devolviendo mutex");
           mutex.release();
-        }
 
 
       } catch (Exception e) {
