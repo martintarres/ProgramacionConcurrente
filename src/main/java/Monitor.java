@@ -42,7 +42,7 @@ public class Monitor{
     try{
 
 
-      System.out.println(Thread.currentThread() + " solicita disparar " + transicion);
+     // System.out.println(Thread.currentThread() + " solicita disparar " + transicion);
       //contador.countDown();
       //contador.await();
 
@@ -50,7 +50,7 @@ public class Monitor{
         //System.out.println( Thread.currentThread()+ " ---- " + h + " esta : " + h.getState());
       //}
       as(transicion);
-      System.out.println( Thread.currentThread() + " volvio de  disparar " + transicion);
+      //System.out.println( Thread.currentThread() + " volvio de  disparar " + transicion);
 
     }
     catch(Exception e ){
@@ -73,21 +73,21 @@ public class Monitor{
       try {
 
 
-        System.out.println("El hilo " + Thread.currentThread() + " pide  el mutex");
+        //System.out.println("El hilo " + Thread.currentThread() + " pide  el mutex");
 
         mutex.acquire();   // Pido el mutex
         // MANDO A DORMIR UN RATO AL HIJO DE PUTA PORQUE EL SCHEDULER DE JAVA NO CORRE EL OTRO
 
-          Thread.currentThread().sleep(1000);
-          System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
-          System.out.println("Threads  esperando por  el mutex  " +  mutex.getQueue());
-          System.out.println("Estado de los Hilos: ");
+          Thread.currentThread().sleep(10);
+         // System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
+         // System.out.println("Threads  esperando por  el mutex  " +  mutex.getQueue());
+         // System.out.println("Estado de los Hilos: ");
 
           //ACÀ SI SE VA A MOSTAR QUE EL OTRO FORRO SE BLOQUEO AL LLAMAR AL MUTEX
-          for (Hilo h : mapa.values()) {
+        /*  for (Hilo h : mapa.values()) {
               System.out.println(h + " esta : " + h.getState());
           }
-
+*/
 
 
         k = true;
@@ -103,15 +103,15 @@ public class Monitor{
             }*/
 
             Vs = getHilosSensibilizados();    // armo la lista de hilos sensibilizados
-            for(Hilo h : Vs){
+         /*   for(Hilo h : Vs){
               System.out.println("Hilos sensibilizados : " + h);
-            }
+            }*/
             //Vc = mutex.getQueue();      // armo la lista de hilos encolados sensibilizados
 
-            System.out.println("Hilos encolados : "+ Vc);
+           // System.out.println("Hilos encolados : "+ Vc);
             estaEnAmbas.clear();
             estaEnAmbas = and();
-            System.out.println("Hilos que estan en ambas "+ estaEnAmbas);
+            //System.out.println("Hilos que estan en ambas "+ estaEnAmbas);
 
             // ACA DEBERIA HABER UNA POLITICA PARA CAMBIAR EL ORDEN DE LA LISTA DEL MUTEX
 
@@ -129,7 +129,7 @@ public class Monitor{
                     //Vc.add((Hilo) Thread.currentThread());
 
                     desencolado.getLock().notify();
-                    return ;
+                    break;
                     //((Hilo) Thread.currentThread()).getLock().wait();
                     //break;
 
@@ -149,10 +149,10 @@ public class Monitor{
             }
 
           } else {
-            System.out.println(Thread.currentThread() + " devuelve el mutex");
+            //System.out.println(Thread.currentThread() + " devuelve el mutex");
 
               Vc.add((Hilo) Thread.currentThread());
-              System.out.println("Hilos encolados: " + Vc);
+              //System.out.println("Hilos encolados: " + Vc);
               mutex.release();
               //Thread.currentThread().sleep(100);
 
@@ -171,9 +171,15 @@ public class Monitor{
 
 
         }
-        System.out.println(Thread.currentThread() + "sale del Monitor");
+        //System.out.println(Thread.currentThread() + "sale del Monitor");
+        if(k){
+          //System.out.println("Sale sin devolver mutex");
 
+        }
+        else{
+          //System.out.println("Sale devolviendo mutex");
           mutex.release();
+        }
 
 
       } catch (Exception e) {
@@ -203,7 +209,7 @@ public class Monitor{
     return lista;
   }
 
-  public void getHilos(){
+  /*public void getHilos(){
 
     System.out.println("voy a mostrar todos los hilos del programa");
     for(Hilo t : listaHilos){
@@ -211,12 +217,12 @@ public class Monitor{
         System.out.println("soy transiciones del hilo " + t.getNombre()+ t.getTransiciones());
     }
   }
-
-  public void saber(){
+*/
+  /*public void saber(){
     System.out.println("soy saber");
       petri.getVectorSensibilizadas().imprimir();
 
-  }
+  }*/
   public void mapeo(Hilo hilo){
     for(Integer i: hilo.getTransiciones()){
       this.mapa.put(i,hilo);

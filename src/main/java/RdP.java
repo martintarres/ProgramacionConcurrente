@@ -7,6 +7,7 @@ public class RdP{
   private Matriz incidenciaPrevia;
   private Matriz incidenciaPosterior;
   private Matriz vectorSensibilizadas;
+  int contador;
 
   public RdP(Matriz marcadoInicial,Matriz incidenciaPrevia,Matriz incidenciaPosterior){
     try{
@@ -19,7 +20,7 @@ public class RdP{
       this.vectorSensibilizadas = Sensibilizadas(incidenciaPrevia, marcadoInicial);
       System.out.println ("transiciones iniciales");
       vectorSensibilizadas.imprimir();
-
+      contador=0;
     }
     catch(Exception e){
     //  throw e;
@@ -53,12 +54,14 @@ public class RdP{
       if(this.vectorSensibilizadas.getMatriz()[0][x]!=0){
         this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
         vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
-        System.out.println("el hilo " + Thread.currentThread()+ " disparo " + x);
+        System.out.println("el hilo " + ((Hilo)(Thread.currentThread())).getNombre() + " disparo " + x);
         vectorSensibilizadas.imprimir();
+        contador++;
+        System.out.println("soy contador " + contador);
         return true;
       }
       else{
-        System.out.println("el hilo " + Thread.currentThread()+ " no pudo disparar " + x);
+        System.out.println("el hilo " + ((Hilo)(Thread.currentThread())).getNombre()+ " no pudo disparar " + x);
         System.out.println("no pude disparar por no estar sensibilizada, queda igual");
         vectorSensibilizadas.imprimir();
         return false;

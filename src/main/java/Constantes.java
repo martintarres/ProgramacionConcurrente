@@ -8,6 +8,7 @@ public class Constantes{
   public  Matriz marcadoInicial;
   // por que no declare cuanto valia las plazas y las transiciones y armaba de una la mtraiz
   public Constantes(){
+
     t10=0;
     t11=1;
     t12=2;
@@ -58,6 +59,7 @@ public class Constantes{
     r3=25;
     s1=26;
     s2=27;
+
     try{
 
 
