@@ -30,7 +30,7 @@ public class leerArchivo {
             int contadorSaltos =0;
             boolean copiando = false;
 
-            while((codigohtml= br.readLine()) != null&&contadorLineas<30) {
+            while((codigohtml= br.readLine()) != null&&contadorLineas<1000) {
 
                 codigocomun = as(codigohtml);
                 if(!copiando&&codigocomun.contains("Forwards incidence matrix I+")){
@@ -45,8 +45,11 @@ public class leerArchivo {
                     if(codigocomun.trim().equals("")){
                         contadorSaltos++;
                     }
-                    buffer1.append(codigocomun);
-                    buffer1.append("\n");
+                    else{
+                        buffer1.append(codigocomun);
+                        buffer1.append("\n");
+                    }
+
                     contadorLineas++;
                 }
 
