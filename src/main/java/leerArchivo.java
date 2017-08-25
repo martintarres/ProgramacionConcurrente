@@ -22,41 +22,41 @@ public class leerArchivo {
 
         try {
 
-            urlob = new URL("file:///home/martin/Documentos/ProgramacionConcurrente/archivo.html");
+            urlob = new URL("file:C:\\Users\\alexa\\Desktop\\PC\\ProgramacionConcurrente\\archivo.html");
             InputStreamReader rea = new InputStreamReader(urlob.openStream());
             BufferedReader br= new BufferedReader(rea);
+            StringBuffer buffer1 = new StringBuffer();
+            int contadorLineas =0;
+            int contadorSaltos =0;
+            boolean copiando = false;
 
-            while((codigohtml= br.readLine()) != null) {
-
-
-                //  System.out.println(codigohtml);
-
+            while((codigohtml= br.readLine()) != null&&contadorLineas<30) {
 
                 codigocomun = as(codigohtml);
-
-             //   if(codigocomun.contains("Forwards incidence matrix I+")){
-
-             //   }
-
-                if(codigocomun.contains("Backwards")){
-
-                    br.close();
+                if(!copiando&&codigocomun.contains("Forwards incidence matrix I+")){
+                    copiando=true;
+                    continue;
                 }
-                else {
-                    System.out.println(codigocomun);
-               }
-                /*
-                if( esNumero(codigocomun)){
 
-                    br.close();
-
-                }else {
-
-                    System.out.println(codigocomun);
+                if(codigocomun.contains("Backwards incidence matrix I-")){
+                    break;
                 }
-                   */
+                if(copiando){
+                    if(codigocomun.trim().equals("")){
+                        contadorSaltos++;
+                    }
+                    buffer1.append(codigocomun);
+                    buffer1.append("\n");
+                    contadorLineas++;
+                }
+
+
 
             }
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.println(buffer1);
+            System.out.println("---------------------------------------------------------------------------------------------");
+            System.out.print("Lineas :" + contadorLineas + "      " + "Saltos :" +  contadorSaltos);
 
 
 
