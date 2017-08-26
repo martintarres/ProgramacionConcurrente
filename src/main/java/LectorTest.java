@@ -10,11 +10,11 @@ public class LectorTest
         //lector.getTextoPlano();
         lector.convertir();
         System.out.println("--------------------------------------------------------------------------------------------");
-        StringBuffer incidenciapPosterior = lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-");
-        System.out.println(incidenciapPosterior);
-        System.out.println("--------------------------------------------------------------------------------------------");
-        System.out.println("Cantidad de Filas :" + lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
-        System.out.println("Cantidad de Columnas :" + lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
+        //StringBuffer incidenciapPosterior = lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-");
+        //System.out.println(incidenciapPosterior);
+        //System.out.println("--------------------------------------------------------------------------------------------");
+        //System.out.println("Cantidad de Filas :" + lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
+        //System.out.println("Cantidad de Columnas :" + lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
 
         /*StringBuffer incidenciapPrevia = lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I");
         System.out.println(incidenciapPrevia);
@@ -23,14 +23,23 @@ public class LectorTest
         System.out.println(marcado);
         System.out.println("--------------------------------------------------------------------------------------------");
         */
-        String[][] tabla = lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-"));
+        String[][] tablaPosterior = lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-"));
         for (int i = 0; i < lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")); i++) {
             for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")) ; j++) {
-                System.out.print(tabla[i][j]);
+                System.out.print(tablaPosterior[i][j]);
             }
             System.out.println("\n");
 
         }
+        String[][] tablaPrevia = lector.getTabla(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I"));
+        for (int i = 0; i < lector.cantidadFilas(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I")); i++) {
+            for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I")) ; j++) {
+                System.out.print(tablaPrevia[i][j]);
+            }
+            System.out.println("\n");
+
+        }
+
 
 
     }

@@ -249,7 +249,7 @@ public class Lector {
 
 
             }
-            for (int i = 0; i < m; i++) {
+            /*for (int i = 0; i < m; i++) {
                 for (int j = 0; j <n ; j++) {
                     System.out.print("  "+ tabla[i][j]);
 
@@ -257,9 +257,11 @@ public class Lector {
                 System.out.print("\n");
                 System.out.print("\n");
 
-            }
+            }*/
+
+
             // TUVE QUE MOVER TODOS LOS DATOS UNA POSICION A LA DERECHA PORQUE EL PIPE ME DEVUELVE UNA TABLA CON VACIO EN LA  POSICION[0][0]
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+            //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
             String[][] arreglo= new String[m][n];
             arreglo[0][0] = "";
             for (int i = 0; i <m ; i++) {
