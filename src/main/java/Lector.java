@@ -100,13 +100,16 @@ public class Lector {
                     break;
                 }
                 if(copiando){
-                    if(linea.trim().equals("")){
+                    pedazo.append(linea);
+                    pedazo.append("\n");
+
+                    /*if(linea.trim().equals("")){
 
                     }
                     else{
                         pedazo.append(linea);
                         pedazo.append("\n");
-                    }
+                    }*/
 
                 }
 
@@ -125,6 +128,95 @@ public class Lector {
             return null;
         }
 
+
+    }
+
+    public int cantidadFilas(StringBuffer buffer){
+        int m=0;
+        int contadorSaltos=0;
+        try {
+
+
+            String linea;
+            StringReader rea = new StringReader(buffer.toString());
+            BufferedReader br= new BufferedReader(rea);
+            StringBuffer pedazo = new StringBuffer();
+            boolean contado = false;
+
+            boolean copiando = false;
+
+            while((linea= br.readLine()) != null) {
+                if(linea.trim().equals("")){
+                    contadorSaltos++;
+                    if(contadorSaltos>3&&!contado){
+                        contado=true;
+                        m++;
+                    }
+
+                }
+                else{
+                    contado=false;
+                    contadorSaltos=0;
+                }
+
+            }
+
+        }
+        catch (MalformedURLException e){
+            e.printStackTrace();
+            return 0;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+        // ES MENOS DOS ES PARA RESTARLE LOS ESPACIOS DEL COMIENZO Y FINAL
+        //ESTABA EL -2, PERO LE CAMBIE AL -1 POR EL COMENTARIO DE ABAJO
+        // LO DEVUELTO ES EL TAMAÑO DE LA MATRIZ DEl PIPE, O SEA, +1 PARA LA PRIMERA FILA DE NOMBRES DE LAS COLUMNAS
+        return m-1;
+    }
+    public int cantidadColumnas(StringBuffer buffer){
+        // SOLO VAA SACAR LA CANTIDAD DE COLUMNAS TENIENDO EN CUENTA LA PRIMERA FILA
+        // QUERIA QUE VERIFICARA QUE EN TODAS LAS LINEAS SE MANTUVIERA LA MISMA CANTIDAD PERO ES UN VIAJE
+        //int m=cantidadFilas(buffer);
+        int n=0;
+        //int contadorFilas=0;
+        try{
+            String linea;
+            StringReader rea = new StringReader(buffer.toString());
+            BufferedReader br= new BufferedReader(rea);
+            StringBuffer pedazo = new StringBuffer();
+            int filasLeidas =0;
+            int contadorSaltos=0;
+            boolean yaLeido=false;
+            while((linea= br.readLine()) != null&&!(filasLeidas==2)) {
+                if(linea.trim().equals("")){
+                    contadorSaltos++;
+
+
+                }
+                else{
+                    //contado=false;
+                    if(contadorSaltos<3){
+                        n++;
+                    }
+                    else{
+                        filasLeidas++;
+                    }
+                    contadorSaltos=0;
+                }
+
+            }
+            // +2 PORQUE CONTE DIFERENTE EL ESPACIO LARO DEL INICIO Y FINAL Y DA PAJA CAMBIARLO
+            return n+2;
+        }
+        catch(Exception e){
+            return 0;
+
+        }
+
+    }
+    public void setDireccion(){
 
     }
 }
