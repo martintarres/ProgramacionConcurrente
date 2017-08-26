@@ -216,6 +216,86 @@ public class Lector {
         }
 
     }
+    public String[][] getTabla(StringBuffer buffer){
+
+        try{
+            String linea;
+            StringReader rea = new StringReader(buffer.toString());
+            BufferedReader br= new BufferedReader(rea);
+            int m = cantidadFilas(buffer);
+            int n = cantidadColumnas(buffer);
+            boolean encontrado=false;
+
+            String[][] tabla = new String[m][n];
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n; j++) {
+                    encontrado=false;
+                    while((linea= br.readLine()) != null&&!encontrado) {
+                        if(linea.trim().equals("")){
+
+
+                        }
+                        else{
+
+                            tabla[i][j]=linea;
+                            encontrado=true;
+                        }
+
+                    }
+
+
+
+                }
+
+
+            }
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j <n ; j++) {
+                    System.out.print("  "+ tabla[i][j]);
+
+                }
+                System.out.print("\n");
+                System.out.print("\n");
+
+            }
+            // TUVE QUE MOVER TODOS LOS DATOS UNA POSICION A LA DERECHA PORQUE EL PIPE ME DEVUELVE UNA TABLA CON VACIO EN LA  POSICION[0][0]
+            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
+            String[][] arreglo= new String[m][n];
+            arreglo[0][0] = "";
+            for (int i = 0; i <m ; i++) {
+                for (int j = 0; j < n; j++) {
+                    if(j!=0){
+                        arreglo[i][j]=tabla[i][j-1];
+                        //System.out.print(arreglo[i][j]);
+                    }
+                    else{
+                        if(i!=0){
+                            arreglo[i][j]=tabla[i-1][n-1];
+                            //System.out.print(arreglo[i][j]);
+
+                        }
+                        else{
+                            arreglo[i][j]="\\";
+                            //System.out.print(arreglo[i][j]);
+                        }
+                    }
+
+
+                }
+                //System.out.println();
+
+            }
+            return arreglo;
+
+        }
+        catch(Exception e){
+           return null;
+        }
+
+
+
+
+    }
     public void setDireccion(){
 
     }

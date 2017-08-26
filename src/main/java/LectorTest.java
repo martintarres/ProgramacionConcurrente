@@ -23,6 +23,14 @@ public class LectorTest
         System.out.println(marcado);
         System.out.println("--------------------------------------------------------------------------------------------");
         */
+        String[][] tabla = lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-"));
+        for (int i = 0; i < lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")); i++) {
+            for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")) ; j++) {
+                System.out.print(tabla[i][j]);
+            }
+            System.out.println("\n");
+
+        }
 
 
     }
