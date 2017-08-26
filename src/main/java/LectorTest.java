@@ -13,13 +13,16 @@ public class LectorTest
         StringBuffer incidenciapPosterior = lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-");
         System.out.println(incidenciapPosterior);
         System.out.println("--------------------------------------------------------------------------------------------");
-        StringBuffer incidenciapPrevia = lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I");
+        System.out.println("Cantidad de Filas :" + lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
+        System.out.println("Cantidad de Columnas :" + lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
+
+        /*StringBuffer incidenciapPrevia = lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I");
         System.out.println(incidenciapPrevia);
         System.out.println("--------------------------------------------------------------------------------------------");
         StringBuffer marcado = lector.cortar("Marking","Enabled transitions");
         System.out.println(marcado);
         System.out.println("--------------------------------------------------------------------------------------------");
-
+        */
 
 
     }
