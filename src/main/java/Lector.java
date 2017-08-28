@@ -9,7 +9,8 @@ import java.awt.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lector {
     private URL urlob;
@@ -149,7 +150,7 @@ public class Lector {
             while((linea= br.readLine()) != null) {
                 if(linea.trim().equals("")){
                     contadorSaltos++;
-                    if(contadorSaltos>3&&!contado){
+                    if(contadorSaltos>2&&!contado){
                         contado=true;
                         m++;
                     }
@@ -305,7 +306,39 @@ public class Lector {
         return arreglo;
 
     }
+    public String[][] getTablaInv(String [][] tabla){
+        List<String> temporal = new ArrayList<String>();
+        for (int i = 0; i < tabla.length; i++) {
+            for (int j = 0; j < tabla[0].length; j++) {
+                temporal.add(tabla[i][j]);
+
+            }
+
+        }
+        String[][] convertida = new String[tabla.length][tabla[0].length-1];
+
+        for (int i = 0; i <convertida.length ; i++) {
+            for (int j = 0; j <convertida[0].length ; j++) {
+                convertida[i][j]=temporal.get(0);
+                temporal.remove(0);
+
+            }
+
+        }
+        return convertida;
+    }
     public void setDireccion(){
+
+    }
+    public int[][] convertirAEnteros(String[][] tabla, int m, int n){ //m y n son los valores desde donde se quiere empezar a leer;
+       int[][] tablaTempEnteros = new int[tabla.length-m][tabla[0].length-n];
+        for (int i = 0; i < tablaTempEnteros.length; i++) {
+            for (int j = 0; j <tablaTempEnteros[0].length ; j++) {
+                tablaTempEnteros[i][j] = Integer.parseInt(tabla[i+m][j+n]);
+            }
+
+        }
+        return tablaTempEnteros;
 
     }
 }

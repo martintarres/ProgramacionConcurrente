@@ -5,24 +5,13 @@ public class LectorTest
 {
     public static void main(String[] args){
         Lector lector = new Lector("file:///C:/Users/Fabrito/Desktop/Materias/ProgramacionConcurrente/TPfinal/ProgramacionConcurrente/archivo.html");
-        //System.out.println(lector.getHtml());
-        //System.out.println(lector.getTextoPlano());
-        //lector.getTextoPlano();
+        Lector lectorinv = new Lector("file:///C:/Users/Fabrito/Desktop/Materias/ProgramacionConcurrente/TPfinal/ProgramacionConcurrente/analisisInvariante.html");
+
         lector.convertir();
         System.out.println("--------------------------------------------------------------------------------------------");
-        //StringBuffer incidenciapPosterior = lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-");
-        //System.out.println(incidenciapPosterior);
-        //System.out.println("--------------------------------------------------------------------------------------------");
-        //System.out.println("Cantidad de Filas :" + lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
-        //System.out.println("Cantidad de Columnas :" + lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
+        lectorinv.convertir();
 
-        /*StringBuffer incidenciapPrevia = lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I");
-        System.out.println(incidenciapPrevia);
-        System.out.println("--------------------------------------------------------------------------------------------");
-        StringBuffer marcado = lector.cortar("Marking","Enabled transitions");
-        System.out.println(marcado);
-        System.out.println("--------------------------------------------------------------------------------------------");
-        */
+        /*
         String[][] tablaPosterior =lector.tablaCorrida( lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
         for (int i = 0; i < lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")); i++) {
             for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")) ; j++) {
@@ -31,7 +20,7 @@ public class LectorTest
             System.out.println("\n");
 
         }
-        String[][] tablaPrevia = lector.getTabla(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I"));
+        String[][] tablaPrevia = lector.tablaCorrida(lector.getTabla(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I")));
         for (int i = 0; i < lector.cantidadFilas(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I")); i++) {
             for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Backwards incidence matrix I-","Combined incidence matrix I")) ; j++) {
                 System.out.print(tablaPrevia[i][j]);
@@ -39,8 +28,40 @@ public class LectorTest
             System.out.println("\n");
 
         }
+        String[][] tablaMarcado = lector.tablaCorrida(lector.getTabla(lector.cortar("Marking","Enabled transitions")));
+        for (int i = 0; i < lector.cantidadFilas(lector.cortar("Marking","Enabled transitions")); i++) {
+            for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Marking","Enabled transitions")) ; j++) {
+                System.out.print(tablaMarcado[i][j]);
+            }
+            System.out.println("\n");
+
+        }*/
+        String[][] tablaPInvariantes =lector.getTablaInv(lectorinv.getTabla(lectorinv.cortar("P-Invariants","The net is covered by positive P-Invariants")));
+        for (int i = 0; i < tablaPInvariantes.length; i++) {
+            for (int j = 0; j <tablaPInvariantes[0].length; j++) {
+                System.out.print(tablaPInvariantes[i][j]);
+
+            }
+            System.out.println("\n");
 
 
+        }
+        int [][] numero = lectorinv.convertirAEnteros(tablaPInvariantes,1,0);
+        for (int i = 0; i < numero.length ; i++) {
+            for (int j = 0; j < numero[0].length; j++) {
+                System.out.print(numero[i][j]);
+            }
+            System.out.println();
 
+        }
+        try{
+            Matriz invariantes = new Matriz(lectorinv.convertirAEnteros(tablaPInvariantes,1,0));
+            invariantes.imprimir();
+        }
+        catch (Exception e){
+
+        }
+        //System.out.println(lectorinv.getTextoPlano());
     }
+
 }
