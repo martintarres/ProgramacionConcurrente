@@ -21,8 +21,9 @@ public class leerArchivo {
        // File file= new File("/home/martin/Documentos/ProgramacionConcurrente/archivo.html");
 
         try {
-
-            urlob = new URL("file:C:\\Users\\alexa\\Desktop\\PC\\ProgramacionConcurrente\\archivo.html");
+            //file:///D:/Documentos/Materias/Programacion%20Concurrente/Trabajo%20final/ProgramacionConcurrente/archivo.html
+            urlob = new URL("file:///C:/Users/Fabrito/Desktop/Materias/ProgramacionConcurrente/TPfinal/ProgramacionConcurrente/archivo.html");
+           // urlob = new URL("file:C:\\Users\\alexa\\Desktop\\PC\\ProgramacionConcurrente\\archivo.html");
             InputStreamReader rea = new InputStreamReader(urlob.openStream());
             BufferedReader br= new BufferedReader(rea);
             StringBuffer buffer1 = new StringBuffer();

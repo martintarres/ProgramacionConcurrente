@@ -15,6 +15,7 @@ public class Lector {
     private URL urlob;
     private StringBuffer html;
     private StringBuffer textoPlano;
+
     public Lector(String direccion){
 
         //SOLO GUARDA EN EL STRINGBUFFER HTML
@@ -262,32 +263,7 @@ public class Lector {
 
             // TUVE QUE MOVER TODOS LOS DATOS UNA POSICION A LA DERECHA PORQUE EL PIPE ME DEVUELVE UNA TABLA CON VACIO EN LA  POSICION[0][0]
             //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-            String[][] arreglo= new String[m][n];
-            arreglo[0][0] = "";
-            for (int i = 0; i <m ; i++) {
-                for (int j = 0; j < n; j++) {
-                    if(j!=0){
-                        arreglo[i][j]=tabla[i][j-1];
-                        //System.out.print(arreglo[i][j]);
-                    }
-                    else{
-                        if(i!=0){
-                            arreglo[i][j]=tabla[i-1][n-1];
-                            //System.out.print(arreglo[i][j]);
-
-                        }
-                        else{
-                            arreglo[i][j]="\\";
-                            //System.out.print(arreglo[i][j]);
-                        }
-                    }
-
-
-                }
-                //System.out.println();
-
-            }
-            return arreglo;
+            return tabla;
 
         }
         catch(Exception e){
@@ -296,6 +272,37 @@ public class Lector {
 
 
 
+
+    }
+    public String[][] tablaCorrida(String [][] tabla){
+        int m = tabla.length;
+        int n = tabla[0].length;
+        String[][] arreglo= new String[m][n];
+        arreglo[0][0] = "";
+        for (int i = 0; i <m ; i++) {
+            for (int j = 0; j < n; j++) {
+                if(j!=0){
+                    arreglo[i][j]=tabla[i][j-1];
+                    //System.out.print(arreglo[i][j]);
+                }
+                else{
+                    if(i!=0){
+                        arreglo[i][j]=tabla[i-1][n-1];
+                        //System.out.print(arreglo[i][j]);
+
+                    }
+                    else{
+                        arreglo[i][j]="\\";
+                        //System.out.print(arreglo[i][j]);
+                    }
+                }
+
+
+            }
+            //System.out.println();
+
+        }
+        return arreglo;
 
     }
     public void setDireccion(){

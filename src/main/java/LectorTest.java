@@ -4,7 +4,7 @@
 public class LectorTest
 {
     public static void main(String[] args){
-        Lector lector = new Lector("file:C:\\Users\\alexa\\Desktop\\PC\\ProgramacionConcurrente\\archivo.html");
+        Lector lector = new Lector("file:///C:/Users/Fabrito/Desktop/Materias/ProgramacionConcurrente/TPfinal/ProgramacionConcurrente/archivo.html");
         //System.out.println(lector.getHtml());
         //System.out.println(lector.getTextoPlano());
         //lector.getTextoPlano();
@@ -23,7 +23,7 @@ public class LectorTest
         System.out.println(marcado);
         System.out.println("--------------------------------------------------------------------------------------------");
         */
-        String[][] tablaPosterior = lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-"));
+        String[][] tablaPosterior =lector.tablaCorrida( lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")));
         for (int i = 0; i < lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")); i++) {
             for (int j = 0; j <lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-")) ; j++) {
                 System.out.print(tablaPosterior[i][j]);
