@@ -9,14 +9,12 @@ import java.awt.*;
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Lector {
     private URL urlob;
     private StringBuffer html;
     private StringBuffer textoPlano;
-
     public Lector(String direccion){
 
         //SOLO GUARDA EN EL STRINGBUFFER HTML
@@ -264,7 +262,32 @@ public class Lector {
 
             // TUVE QUE MOVER TODOS LOS DATOS UNA POSICION A LA DERECHA PORQUE EL PIPE ME DEVUELVE UNA TABLA CON VACIO EN LA  POSICION[0][0]
             //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++");
-            return tabla;
+            String[][] arreglo= new String[m][n];
+            arreglo[0][0] = "";
+            for (int i = 0; i <m ; i++) {
+                for (int j = 0; j < n; j++) {
+                    if(j!=0){
+                        arreglo[i][j]=tabla[i][j-1];
+                        //System.out.print(arreglo[i][j]);
+                    }
+                    else{
+                        if(i!=0){
+                            arreglo[i][j]=tabla[i-1][n-1];
+                            //System.out.print(arreglo[i][j]);
+
+                        }
+                        else{
+                            arreglo[i][j]="\\";
+                            //System.out.print(arreglo[i][j]);
+                        }
+                    }
+
+
+                }
+                //System.out.println();
+
+            }
+            return arreglo;
 
         }
         catch(Exception e){
@@ -275,70 +298,7 @@ public class Lector {
 
 
     }
-    public String[][] tablaCorrida(String [][] tabla){
-        int m = tabla.length;
-        int n = tabla[0].length;
-        String[][] arreglo= new String[m][n];
-        arreglo[0][0] = "";
-        for (int i = 0; i <m ; i++) {
-            for (int j = 0; j < n; j++) {
-                if(j!=0){
-                    arreglo[i][j]=tabla[i][j-1];
-                    //System.out.print(arreglo[i][j]);
-                }
-                else{
-                    if(i!=0){
-                        arreglo[i][j]=tabla[i-1][n-1];
-                        //System.out.print(arreglo[i][j]);
-
-                    }
-                    else{
-                        arreglo[i][j]="\\";
-                        //System.out.print(arreglo[i][j]);
-                    }
-                }
-
-
-            }
-            //System.out.println();
-
-        }
-        return arreglo;
-
-    }
-    public String[][] getTablaInv(String [][] tabla){
-        List<String> temporal = new ArrayList<String>();
-        for (int i = 0; i < tabla.length; i++) {
-            for (int j = 0; j < tabla[0].length; j++) {
-                temporal.add(tabla[i][j]);
-
-            }
-
-        }
-        String[][] convertida = new String[tabla.length][tabla[0].length-1];
-
-        for (int i = 0; i <convertida.length ; i++) {
-            for (int j = 0; j <convertida[0].length ; j++) {
-                convertida[i][j]=temporal.get(0);
-                temporal.remove(0);
-
-            }
-
-        }
-        return convertida;
-    }
     public void setDireccion(){
-
-    }
-    public int[][] convertirAEnteros(String[][] tabla, int m, int n){ //m y n son los valores desde donde se quiere empezar a leer;
-       int[][] tablaTempEnteros = new int[tabla.length-m][tabla[0].length-n];
-        for (int i = 0; i < tablaTempEnteros.length; i++) {
-            for (int j = 0; j <tablaTempEnteros[0].length ; j++) {
-                tablaTempEnteros[i][j] = Integer.parseInt(tabla[i+m][j+n]);
-            }
-
-        }
-        return tablaTempEnteros;
 
     }
 }

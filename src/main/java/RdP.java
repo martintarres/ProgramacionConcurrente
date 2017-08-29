@@ -13,11 +13,21 @@ public class RdP{
     try{
       //if (mInicial==null) throw
       this.marcadoInicial = marcadoInicial;
+
       this.marcadoActual = marcadoInicial;
+
       this.incidenciaPrevia = incidenciaPrevia;
+
       this.incidenciaPosterior = incidenciaPosterior;
+
       this.incidencia = Matriz.suma(this.incidenciaPosterior,Matriz.porEscalar(this.incidenciaPrevia,-1));
+     // System.out.println("matriz incidenciaaaa");
+     // incidencia.imprimir();
+     // System.out.println("");
       this.vectorSensibilizadas = Sensibilizadas(incidenciaPrevia, marcadoInicial);
+      //System.out.println("vector sensiblizadas");
+      //vectorSensibilizadas.imprimir();
+      //System.out.println("");
       System.out.println ("transiciones iniciales");
       vectorSensibilizadas.imprimir();
       contador=0;
@@ -46,8 +56,9 @@ public class RdP{
 
 
   public boolean disparar(int x) throws RdPException{
+    System.out.println("entre a disparar con " + x);
     try{
-
+      System.out.println("entre al try con  " + x);
       if(x<0||x>this.incidencia.getMatriz()[0].length){
         throw new RdPException("Transicion no valida.");
       }

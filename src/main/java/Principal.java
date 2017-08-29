@@ -6,10 +6,10 @@ public class Principal {
     public static void main (String[] args){
 
         Constantes constantes= new Constantes();
-        Monitor monitor= new Monitor(constantes);
+    //    Monitor monitor= new Monitor(constantes);
 
-        List<Integer> l1= new ArrayList<Integer>();
-        List<Integer> l2= new ArrayList<Integer>();
+     //   List<Integer> l1= new ArrayList<Integer>();
+       // List<Integer> l2= new ArrayList<Integer>();
        /* List<Integer> l3= new ArrayList<Integer>();
         List<Integer> l4= new ArrayList<Integer>();
         List<Integer> l5= new ArrayList<Integer>();
@@ -18,13 +18,24 @@ public class Principal {
         List<Integer> l8= new ArrayList<Integer>();
         List<Integer> l9= new ArrayList<Integer>();
 */
-        //l1.add(constantes.t13);
+/*
         l1.add(constantes.t21);
         l1.add(constantes.t22);
 
 
         l2.add(constantes.t23);
         l2.add(constantes.t24);
+
+*/
+/*
+        l1.add(constantes.arregloT.get(0));
+        l1.add(constantes.arregloT.get(1));
+
+        l1.add(constantes.arregloT.get(2));
+        l1.add(constantes.arregloT.get(3));
+*/
+      //  l2.add(constantes.arregloT.get(12));
+      //  l2.add(constantes.arregloT.get(13));
 
 /*
         l3.add(constantes.t10);
@@ -52,8 +63,9 @@ public class Principal {
         l9.add(constantes.t33);
         l9.add(constantes.t34);
 */
-        Hilo h1 = new Hilo("Hilo 1",l1, monitor);
-        Hilo h2 = new Hilo("Hilo 2",l2, monitor);
+
+      //  Hilo h1 = new Hilo("Hilo 1",l1, monitor);
+    //    Hilo h2 = new Hilo("Hilo 2",l2, monitor);
  /*
         Hilo h3 = new Hilo("Hilo 3",l3, monitor);
         Hilo h4 = new Hilo("Hilo 4",l4, monitor);
@@ -64,8 +76,8 @@ public class Principal {
         Hilo h9 = new Hilo("Hilo 9",l9, monitor);
 
 */
-        monitor.mapeo(h1);
-        monitor.mapeo(h2);
+       // monitor.mapeo(h1);
+   //     monitor.mapeo(h2);
  /*
         monitor.mapeo(h3);
         monitor.mapeo(h4);
@@ -78,8 +90,10 @@ public class Principal {
        // monitor.showMapa();
 
 
-        h1.start();
-        h2.start();
+
+      //  h1.start();
+     //   h2.start();
+
  /*
         h3.start();
         h4.start();

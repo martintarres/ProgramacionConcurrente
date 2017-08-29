@@ -79,7 +79,7 @@ public class Monitor{
         // MANDO A DORMIR UN RATO AL HIJO DE PUTA PORQUE EL SCHEDULER DE JAVA NO CORRE EL OTRO
 
           Thread.currentThread().sleep(10);
-         // System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
+          System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
          // System.out.println("Threads  esperando por  el mutex  " +  mutex.getQueue());
          // System.out.println("Estado de los Hilos: ");
 
@@ -103,9 +103,9 @@ public class Monitor{
             }*/
 
             Vs = getHilosSensibilizados();    // armo la lista de hilos sensibilizados
-         /*   for(Hilo h : Vs){
+            for(Hilo h : Vs){
               System.out.println("Hilos sensibilizados : " + h);
-            }*/
+            }
             //Vc = mutex.getQueue();      // armo la lista de hilos encolados sensibilizados
 
            // System.out.println("Hilos encolados : "+ Vc);
@@ -129,7 +129,7 @@ public class Monitor{
                     //Vc.add((Hilo) Thread.currentThread());
 
                     desencolado.getLock().notify();
-                    break;
+                    return;
                     //((Hilo) Thread.currentThread()).getLock().wait();
                     //break;
 
@@ -172,14 +172,9 @@ public class Monitor{
 
         }
         //System.out.println(Thread.currentThread() + "sale del Monitor");
-        if(k){
-          //System.out.println("Sale sin devolver mutex");
 
-        }
-        else{
-          //System.out.println("Sale devolviendo mutex");
           mutex.release();
-        }
+
 
 
       } catch (Exception e) {

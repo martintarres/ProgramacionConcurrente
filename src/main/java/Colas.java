@@ -57,7 +57,7 @@ public class Colas {
         Constantes constantes= new Constantes();
         Monitor monitor= new Monitor(constantes);
 
-        List<Integer> l1= new ArrayList<Integer>();
+       /* List<Integer> l1= new ArrayList<Integer>();
         List<Integer> l2= new ArrayList<Integer>();
 
         l1.add(constantes.t21);
@@ -92,6 +92,7 @@ public class Colas {
 
         System.out.println("Muestro la nueva cola (Sin el hilo que saque) " + colas.quienesEstan());
 
+*/
     }
 
 }
