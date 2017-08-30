@@ -5,21 +5,24 @@ import java.util.Vector;
 public class Constantes {
 
 
-  public Vector <Integer> arregloT = new Vector <Integer>();
-  public Vector <Integer> arregloMP = new Vector <Integer>();
+  public Vector <String> arregloT = new Vector <String>();
+  public Vector <String> arregloMP = new Vector <String>();
 
   public Matriz incidenciaPrevia;
   public Matriz incidenciaPosterior;
   public Matriz marcadoInicial;
   public Matriz PInvariante;
 
+  public int inci1;
+  public int inci2;
+  public int TotalPInva;
   // por que no declare cuanto valia las plazas y las transiciones y armaba de una la mtraiz
   public Constantes() {
 
-    int inci1 = 0;  // Para calcular numero de filas de las matrices
-    int inci2 = -1; // Para calcular numero de columnas de lsa matrices
+     inci1 = 0;  // Para calcular numero de filas de las matrices
+     inci2 = -1; // Para calcular numero de columnas de lsa matrices
 
-    int TotalPInva= -1;  // Para calcular el numero de filas de la matriz de P invariantes
+    TotalPInva= -1;  // Para calcular el numero de filas de la matriz de P invariantes
 
     Lector lector = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/archivo.html");
     Lector lector1 = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/analisisInvariante.html");
@@ -32,7 +35,7 @@ public class Constantes {
       for (int j = 0; j < lector.cantidadColumnas(lector.cortar("Forwards incidence matrix I+", "Backwards incidence matrix I-")); j++) {
         if (Posterior[i][j].contains("T")) {
           // System.out.println(Posterior[i][j]);
-          arregloT.add(inci1);
+          arregloT.add(Posterior[i][j]);
           //System.out.println("Voy a mostrar mi vector arregloT " + arregloT.elementAt(inci1));
           inci1++;
 
@@ -49,7 +52,7 @@ public class Constantes {
       for (int j = 0; j < 1; j++) {
         // System.out.println(tablaPevia[i][j]);
         if (inci2 != -1) {
-          arregloMP.add(inci2);
+          arregloMP.add(Posterior[i][j]);
           //System.out.println("Voy a mostrar mi vector arregloMP " + arregloMP.elementAt(inci2));
         }
 

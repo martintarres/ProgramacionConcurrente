@@ -11,9 +11,11 @@ public class RdP{
   private Matriz MInvariantes;
   private List<PInvariante> listaPI;
 
+  //public Matriz PInvariantes;
+
   int contador;
 
-  public RdP(Matriz marcadoInicial,Matriz incidenciaPrevia,Matriz incidenciaPosterior,Matriz MInvariantes){
+  public RdP(Matriz marcadoInicial,Matriz incidenciaPrevia,Matriz incidenciaPosterior,Matriz MInvariantes, Matriz PInvariantes){
     try{
       //if (mInicial==null) throw
       this.marcadoInicial = marcadoInicial;
@@ -26,6 +28,7 @@ public class RdP{
 
       this.MInvariantes = MInvariantes;
       this.listaPI = new ArrayList<PInvariante>();
+    //  this.PInvariantes= PInvariantes;
       crearListaInvariantes();
       System.out.println("Lista Invariantes");
       for(PInvariante pi: this.listaPI){
@@ -33,7 +36,7 @@ public class RdP{
         for(Integer i: pi.getplazas()){
           plazas =plazas+":" +i;
         }
-        //System.out.println(plazas + " = " +pi.cantidadTokens(marcadoInicial));
+        System.out.println(plazas + " = " +pi.cantidadTokens(marcadoInicial));
         System.out.println(plazas + " = " +pi.getConstante());
       }
 

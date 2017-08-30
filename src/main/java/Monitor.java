@@ -10,7 +10,7 @@ public class Monitor{
   private Semaforo mutex;
   //private Semaphore mutex;
   private boolean k;
-  private RdP petri;
+  public RdP petri;
   private List<Hilo> listaHilos;
   private Map<Integer,Hilo> mapa;
   //private Constantes constantes;
