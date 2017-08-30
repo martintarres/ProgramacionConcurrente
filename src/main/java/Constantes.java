@@ -21,8 +21,8 @@ public class Constantes {
 
     int TotalPInva= -1;  // Para calcular el numero de filas de la matriz de P invariantes
 
-    Lector lector = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/archivoPrueba.html");
-    Lector lector1 = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/InvariantePruebas.html");
+    Lector lector = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/archivo.html");
+    Lector lector1 = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/analisisInvariante.html");
     lector.convertir();
     lector1.convertir();
 
