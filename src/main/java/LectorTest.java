@@ -1,10 +1,18 @@
 /**
  * Created by YepezHinostroza on 25/8/2017.
  */
+import java.io.File;
 public class LectorTest
 {
     public static void main(String[] args){
-        Lector lector = new Lector("file:///home/martin/Documentos/ProgramacionConcurrente/archivo.html");
+        try{
+            String file= "file:///";
+            String path = (new File(".")).getCanonicalPath();
+            System.out.println("Ruta actual ");
+            System.out.println(file+path);
+            String archivo = "/archivo.html";
+
+        Lector lector = new Lector(file+path+archivo);
         //System.out.println(lector.getHtml());
         //System.out.println(lector.getTextoPlano());
         //lector.getTextoPlano();
@@ -47,5 +55,9 @@ public class LectorTest
           }
           System.out.println("");
     }
+        }
+        catch(Exception e){
+
+        }
 }
 }
