@@ -13,6 +13,7 @@ public class Constantes {
   public Matriz incidenciaPosterior;
   public Matriz marcadoInicial;
   public Matriz PInvariante;
+  public String[] nombreTransiciones;
 
   // por que no declare cuanto valia las plazas y las transiciones y armaba de una la mtraiz
   public Constantes() {
@@ -54,6 +55,15 @@ public class Constantes {
         //System.out.println("\n");
 
       }
+      System.out.println("Nombres de las transiciones");
+      nombreTransiciones = new String[Posterior[0].length-1];
+      for(int i=0;i<nombreTransiciones.length;i++){
+        nombreTransiciones[i]=Posterior[0][i+1];
+      }
+      for(String  i: nombreTransiciones){
+        System.out.print(i+" ");
+      }
+      System.out.println();
 
       // String[][] tablaPosterior = lector.getTabla(lector.cortar("Forwards incidence matrix I+","Backwards incidence matrix I-"));
       for (int i = 0; i < lector.cantidadFilas(lector.cortar("Forwards incidence matrix I+", "Backwards incidence matrix I-")); i++) {
@@ -248,6 +258,15 @@ public class Constantes {
       return false;
     }
 
+  }
+  public int traducir(String transicion) throws Exception{
+
+    for (int i = 0; i < nombreTransiciones.length; i++) {
+      if(transicion.equals(nombreTransiciones[i])){
+        return i;
+      }
+    }
+    throw new Exception("No existe ese nombre de transicion");
   }
 
 }
