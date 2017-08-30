@@ -19,11 +19,11 @@ public class Constantes {
     try{
       String file= "file:///";
       String path = (new File(".")).getCanonicalPath();
-      System.out.println("Ruta actual ");
-      System.out.println(file+path);
+      //System.out.println("Ruta actual ");
+      //System.out.println(file+path);
       String archivo = "/archivo.html";
       String invariantes ="/analisisInvariante.html";
-      System.out.println(file+path+archivo);
+      //System.out.println(file+path+archivo);
       int inci1 = 0;  // Para calcular numero de filas de las matrices
       int inci2 = -1; // Para calcular numero de columnas de lsa matrices
 
@@ -70,14 +70,14 @@ public class Constantes {
 
       }
 
-
+/*
       System.out.println("");
       System.out.println("");
       System.out.println("");
-
+*/
       int[][] posterior = new int[inci2][inci1];
 
-      System.out.println("voy a mostrar matriz de incidendia posterior");
+      //System.out.println("voy a mostrar matriz de incidendia posterior");
 
 
       for (int i = 0; i < inci2 + 1; i++) {
@@ -102,15 +102,15 @@ public class Constantes {
       }
 
 
-      incidenciaPosterior.imprimir();
+      //incidenciaPosterior.imprimir();
 
-
+/*
       System.out.println("");
       System.out.println("");
       System.out.println("");
-
+*/
       int[][] previa = new int[inci2][inci1];
-      System.out.println("voy a mostrar tabla previa ");
+      //System.out.println("voy a mostrar tabla previa ");
       String[][] tablaPrevia = lector.getTabla(lector.cortar("Backwards incidence matrix I-", "Combined incidence matrix I"));
       for (int i = 0; i < inci2 + 1; i++) {
         for (int j = 0; j < inci1 + 1; j++) {
@@ -130,15 +130,15 @@ public class Constantes {
         e.printStackTrace();
       }
 
-      incidenciaPrevia.imprimir();
+      //incidenciaPrevia.imprimir();
 
-
+/*
       System.out.println("");
       System.out.println("");
       System.out.println("");
-
+*/
       int[][] incial = new int[inci2][1];
-      System.out.println("voy a mostrar marcado incial ");
+      //System.out.println("voy a mostrar marcado incial ");
 
       String[][] tablaInicial = lector.getTabla(lector.cortar("Marking", "Current"));
       for (int i = 0; i < lector.cantidadFilas(lector.cortar("Marking", "Current")); i++) {
@@ -150,7 +150,7 @@ public class Constantes {
           }
 
         }
-        System.out.println("");
+       // System.out.println("");
       }
 
       try {
@@ -159,16 +159,16 @@ public class Constantes {
         e.printStackTrace();
       }
 
-      marcadoInicial.imprimir();
+      //marcadoInicial.imprimir();
 
-
+/*
       System.out.println("");
       System.out.println("");
       System.out.println("");
 
+*/
 
-
-      System.out.println("voy a mostrar P invariantes ");
+      //System.out.println("voy a mostrar P invariantes ");
 
       List <Integer> lista = new ArrayList <Integer>();
 
@@ -224,7 +224,7 @@ public class Constantes {
         e.printStackTrace();
       }
 
-      PInvariante.imprimir();
+     // PInvariante.imprimir();
 
     }
     catch(Exception e){

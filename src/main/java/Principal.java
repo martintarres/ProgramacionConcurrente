@@ -6,7 +6,14 @@ public class Principal {
     public static void main (String[] args){
 
         Constantes constantes= new Constantes();
-    //    Monitor monitor= new Monitor(constantes);
+
+        Monitor monitor= new Monitor(constantes);
+        System.out.println("Marcado Actual: ");
+        monitor.getPetri().marcadoActual().imprimir();
+        System.out.println("Matriz Incidencia: ");
+        monitor.getPetri().getIncidencia().imprimir();
+        System.out.println("Matriz P Invariantes: ");
+        monitor.getPetri().getMInvariantes().imprimir();
 
      //   List<Integer> l1= new ArrayList<Integer>();
        // List<Integer> l2= new ArrayList<Integer>();

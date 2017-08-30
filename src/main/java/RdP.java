@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class RdP{
@@ -7,9 +8,12 @@ public class RdP{
   private Matriz incidenciaPrevia;
   private Matriz incidenciaPosterior;
   private Matriz vectorSensibilizadas;
+  private Matriz MInvariantes;
+  private List<PInvariante> listaPI;
+
   int contador;
 
-  public RdP(Matriz marcadoInicial,Matriz incidenciaPrevia,Matriz incidenciaPosterior){
+  public RdP(Matriz marcadoInicial,Matriz incidenciaPrevia,Matriz incidenciaPosterior,Matriz MInvariantes){
     try{
       //if (mInicial==null) throw
       this.marcadoInicial = marcadoInicial;
@@ -19,6 +23,20 @@ public class RdP{
       this.incidenciaPrevia = incidenciaPrevia;
 
       this.incidenciaPosterior = incidenciaPosterior;
+
+      this.MInvariantes = MInvariantes;
+      this.listaPI = new ArrayList<PInvariante>();
+      crearListaInvariantes();
+      System.out.println("Lista Invariantes");
+      for(PInvariante pi: this.listaPI){
+        String plazas = "";
+        for(Integer i: pi.getplazas()){
+          plazas =plazas+":" +i;
+        }
+        //System.out.println(plazas + " = " +pi.cantidadTokens(marcadoInicial));
+        System.out.println(plazas + " = " +pi.getConstante());
+      }
+
 
       this.incidencia = Matriz.suma(this.incidenciaPosterior,Matriz.porEscalar(this.incidenciaPrevia,-1));
      // System.out.println("matriz incidenciaaaa");
@@ -42,6 +60,9 @@ public class RdP{
   }
   public Matriz getIncidenciaPrevia(){
     return this.incidenciaPrevia;
+  }
+  public Matriz getMInvariantes(){
+    return this.MInvariantes;
   }
 
   public List<Integer> sensibilizadas(){
@@ -123,6 +144,23 @@ public class RdP{
     return vectorSensibilizadas;
     //return null;
   }
+  public void crearListaInvariantes(){
+    int [][]  arreglo = this.getMInvariantes().getMatriz();
+    for (int i = 0; i <arreglo.length ; i++) {
+      List<Integer> posiciones = new ArrayList<Integer>();
+
+      for (int j = 0; j < arreglo[0].length; j++) {
+        if(arreglo[i][j]!=0){
+          posiciones.add(j);
+        }
+      }
+      PInvariante pi = new PInvariante(posiciones,marcadoInicial);
+      listaPI.add(pi);
+
+
+    }
+  }
+
 
 //Algunas noches, soy facil, uoooo uooooo
 

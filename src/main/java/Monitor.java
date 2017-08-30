@@ -28,7 +28,7 @@ public class Monitor{
     mutex = new Semaforo(1,true);
     k=true;
     //constantes = new Constantes();
-    petri = new RdP(constantes.marcadoInicial, constantes.incidenciaPrevia, constantes.incidenciaPosterior);
+    petri = new RdP(constantes.marcadoInicial, constantes.incidenciaPrevia, constantes.incidenciaPosterior,constantes.PInvariante);
     listaHilos= new ArrayList <Hilo>();
     mapa = new HashMap<Integer,Hilo>();
     Vs= new ArrayList <Hilo>();
@@ -248,6 +248,10 @@ public class Monitor{
       return  new ArrayList<Hilo>();
     }
   }
+  public RdP getPetri(){
+    return this.petri;
+  }
+
 
 
 }
