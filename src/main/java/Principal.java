@@ -8,7 +8,7 @@ public class Principal {
         Constantes constantes= new Constantes();
 
         Monitor monitor= new Monitor(constantes);
-        System.out.println("Marcado Actual: ");
+      /*  System.out.println("Marcado Actual: ");
         // SOLO LA TRANSPONGO PARA QUE SE IMPRIMI EN UNA LINEA
         monitor.getPetri().marcadoActual().transpuesta().imprimir();
         System.out.println("Matriz Incidencia: ");
@@ -35,7 +35,7 @@ public class Principal {
         l2.add(constantes.t24);
 */
 
-
+/*
         l1.add(constantes.arregloT.get(0));
         l1.add(constantes.arregloT.get(1));
 
@@ -72,7 +72,7 @@ public class Principal {
         l9.add(constantes.t34);
 */
 
-        Hilo h1 = new Hilo("Hilo 1",l1, monitor);
+    /*    Hilo h1 = new Hilo("Hilo 1",l1, monitor);
     //    Hilo h2 = new Hilo("Hilo 2",l2, monitor);
 
      /*   Hilo h3 = new Hilo("Hilo 3",l3, monitor);
@@ -84,7 +84,7 @@ public class Principal {
         Hilo h9 = new Hilo("Hilo 9",l9, monitor);
 */
 
-        monitor.mapeo(h1);
+     /*   monitor.mapeo(h1);
  /*       monitor.mapeo(h2);
 
         monitor.mapeo(h3);
@@ -99,7 +99,7 @@ public class Principal {
 */
 
 
-        h1.start();
+     //   h1.start();
      //   h2.start();
 /*
 
