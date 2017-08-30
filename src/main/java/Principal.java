@@ -9,7 +9,8 @@ public class Principal {
 
         Monitor monitor= new Monitor(constantes);
         System.out.println("Marcado Actual: ");
-        monitor.getPetri().marcadoActual().imprimir();
+        // SOLO LA TRANSPONGO PARA QUE SE IMPRIMI EN UNA LINEA
+        monitor.getPetri().marcadoActual().transpuesta().imprimir();
         System.out.println("Matriz Incidencia: ");
         monitor.getPetri().getIncidencia().imprimir();
         System.out.println("Matriz P Invariantes: ");

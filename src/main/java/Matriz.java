@@ -125,5 +125,24 @@ public class Matriz{
     Matriz resultado = Matriz.multiplicacion(new Matriz(array),matriz);
     return resultado;
   }
+  public Matriz transpuesta(){
+    int m = this.getM();
+    int n = this.getN();
+    int [][] original = this.getMatriz();
+    int[][] transpuesto = new  int[n][m];
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < m; j++) {
+        transpuesto[i][j] = original[j][i];
+
+      }
+    }
+    try{
+      return new Matriz(transpuesto);
+    }catch (Exception e ){
+      return null;
+    }
+
+
+  }
 
 }

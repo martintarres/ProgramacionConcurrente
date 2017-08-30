@@ -159,6 +159,10 @@ public class RdP{
 
 
     }
+
+  }
+  public List<PInvariante> getPInvariantes(){
+    return this.listaPI;
   }
 
 
