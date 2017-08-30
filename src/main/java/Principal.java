@@ -16,16 +16,16 @@ public class Principal {
         System.out.println("Matriz P Invariantes: ");
         monitor.getPetri().getMInvariantes().imprimir();
 
-     //   List<Integer> l1= new ArrayList<Integer>();
-       // List<Integer> l2= new ArrayList<Integer>();
-       /* List<Integer> l3= new ArrayList<Integer>();
+        List<Integer> l1= new ArrayList<Integer>();
+        List<Integer> l2= new ArrayList<Integer>();
+        List<Integer> l3= new ArrayList<Integer>();
         List<Integer> l4= new ArrayList<Integer>();
         List<Integer> l5= new ArrayList<Integer>();
         List<Integer> l6= new ArrayList<Integer>();
         List<Integer> l7= new ArrayList<Integer>();
         List<Integer> l8= new ArrayList<Integer>();
         List<Integer> l9= new ArrayList<Integer>();
-*/
+
 /*
         l1.add(constantes.t21);
         l1.add(constantes.t22);
@@ -33,20 +33,20 @@ public class Principal {
 
         l2.add(constantes.t23);
         l2.add(constantes.t24);
-
 */
-/*
+
+
         l1.add(constantes.arregloT.get(0));
         l1.add(constantes.arregloT.get(1));
 
         l1.add(constantes.arregloT.get(2));
         l1.add(constantes.arregloT.get(3));
-*/
-      //  l2.add(constantes.arregloT.get(12));
+
+        l2.add(constantes.arregloT.get(12));
       //  l2.add(constantes.arregloT.get(13));
 
-/*
-        l3.add(constantes.t10);
+
+        /*l3.add(constantes.t10);
 
 
         l4.add(constantes.t11);
@@ -72,21 +72,21 @@ public class Principal {
         l9.add(constantes.t34);
 */
 
-      //  Hilo h1 = new Hilo("Hilo 1",l1, monitor);
+        Hilo h1 = new Hilo("Hilo 1",l1, monitor);
     //    Hilo h2 = new Hilo("Hilo 2",l2, monitor);
- /*
-        Hilo h3 = new Hilo("Hilo 3",l3, monitor);
+
+     /*   Hilo h3 = new Hilo("Hilo 3",l3, monitor);
         Hilo h4 = new Hilo("Hilo 4",l4, monitor);
         Hilo h5 = new Hilo("Hilo 5",l5, monitor);
         Hilo h6 = new Hilo("Hilo 6",l6, monitor);
         Hilo h7 = new Hilo("Hilo 7",l7, monitor);
         Hilo h8 = new Hilo("Hilo 8",l8, monitor);
         Hilo h9 = new Hilo("Hilo 9",l9, monitor);
-
 */
-       // monitor.mapeo(h1);
-   //     monitor.mapeo(h2);
- /*
+
+        monitor.mapeo(h1);
+ /*       monitor.mapeo(h2);
+
         monitor.mapeo(h3);
         monitor.mapeo(h4);
         monitor.mapeo(h5);
@@ -94,15 +94,15 @@ public class Principal {
         monitor.mapeo(h7);
         monitor.mapeo(h8);
         monitor.mapeo(h9);
-*/
+
        // monitor.showMapa();
+*/
 
 
-
-      //  h1.start();
+        h1.start();
      //   h2.start();
+/*
 
- /*
         h3.start();
         h4.start();
         h5.start();
