@@ -2,6 +2,8 @@
  * Created by Fabrizio_p on 30/08/2017.
  */
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Log {
     private File marcados;
@@ -11,6 +13,7 @@ public class Log {
     private BufferedReader br;
     private PrintWriter pw;
     private BufferedWriter bw;
+    private List<String> lineasLeidas;
 
     public Log(String marcados,String registro){
         this.direccionMarcado = marcados;
@@ -19,7 +22,8 @@ public class Log {
         this.registro = new File(registro);
 
     }
-    public void leer(){
+    public List<String> leerLineas(){
+        lineasLeidas = new ArrayList<String>();
 
         try{
          // String file = "file://" ;
@@ -29,8 +33,13 @@ public class Log {
           FileReader fr = new FileReader(this.marcados);
           br = new BufferedReader(fr);
           String linea;
-            while((linea=br.readLine())!=null)
-                System.out.println(linea);
+            while((linea=br.readLine())!=null){
+                // Me agregaba una línea con un string vacio sino
+                if(linea.length()!=0)
+                lineasLeidas.add(linea);
+            }
+            return lineasLeidas;
+
         }
         catch(Exception e){
             System.err.println(e.getMessage());
@@ -38,11 +47,12 @@ public class Log {
         finally {
             try{
                 br.close();
+
             }
             catch(Exception e){
 
             }
-
+            return lineasLeidas;
         }
     }
     public void escribir(String linea,File destino){
@@ -65,7 +75,7 @@ public class Log {
                 //pw.close();
             }
             catch(Exception e){
-
+                return;
             }
 
         }
@@ -86,5 +96,28 @@ public class Log {
         if(this.registro.exists())
             this.registro.delete();
         this.registro=new File(direccionRegistro);
+    }
+    public Matriz getMarcado(String linea){
+        List<Integer> enteros = new ArrayList<Integer>();
+        String[] partes = linea.split(" ");
+        for(String parte: partes){
+            if(Constantes.esNumero(parte)){
+                enteros.add(Integer.parseInt(parte));
+            }
+        }
+        int[][] arreglo = new int[enteros.size()][1];
+        for (int i = 0; i < arreglo.length; i++) {
+            arreglo[i][0]=enteros.get(0);
+            enteros.remove(0);
+
+        }
+        try{
+            Matriz marcadoActual = new Matriz(arreglo);
+            //System.out.println("Matriz Marcado Actual: ");
+            //marcadoActual.transpuesta().imprimir();
+            return marcadoActual;
+        }catch(Exception e){
+            return null;
+        }
     }
 }
