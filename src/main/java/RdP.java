@@ -165,6 +165,18 @@ public class RdP{
     return this.listaPI;
   }
 
+  public boolean verificarMarcado(Matriz marcado){
+    //boolean resultado=true;
+    for (PInvariante pi :
+            listaPI) {
+      if(!pi.verificarPInvvariante(marcado)){
+        return false;
+      }
+
+    }
+    return true;
+  }
+
 
 //Algunas noches, soy facil, uoooo uooooo
 

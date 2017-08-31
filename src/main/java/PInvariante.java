@@ -28,4 +28,7 @@ public class PInvariante {
           return sumatoria;
 
       }
+      public boolean verificarPInvvariante(Matriz marcado){
+          return this.getConstante()==cantidadTokens(marcado);
+      }
 }
