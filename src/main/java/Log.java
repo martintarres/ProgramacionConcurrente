@@ -5,13 +5,19 @@ import java.io.*;
 
 public class Log {
     private File archivoOrigen;
+    private File archivoDestino;
     private String origen;
     private String destino;
     private String texto;
+    private BufferedReader br;
+    private PrintWriter pw;
+    private BufferedWriter bw;
 
     public Log(String origen, String destino){
         this.origen = origen;
         this.destino = destino;
+        this.archivoOrigen = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
+        this.archivoDestino = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
 
     }
     public void leer(){
@@ -19,10 +25,10 @@ public class Log {
         try{
          // String file = "file://" ;
          // String direccion =  "C:\\Users\\Fabrito\\Desktop\\Materias\\ProgramacionConcurrente\\Tp final\\src\\texto.txt";
-          this.archivoOrigen = new File("/home/martin/Documentos/texto");
-          System.out.println("---------");
+
+          //System.out.println("---------");
           FileReader fr = new FileReader(this.archivoOrigen);
-          BufferedReader br = new BufferedReader(fr);
+          br = new BufferedReader(fr);
           String linea;
             while((linea=br.readLine())!=null)
                 System.out.println(linea);
@@ -31,10 +37,40 @@ public class Log {
             System.err.println(e.getMessage());
         }
         finally {
+            try{
+                br.close();
+            }
+            catch(Exception e){
+
+            }
 
         }
     }
-    public void escribir(){
+    public void escribir(String linea){
+        try{
+            FileWriter fw = new FileWriter(archivoDestino,true);
+            //fw.write(linea);
+
+            //pw = new PrintWriter(fw);
+            //pw.println(linea);
+            bw = new BufferedWriter(fw);
+            bw.write(linea);
+            bw.newLine();
+        }
+        catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+        finally {
+            try{
+                bw.close();
+                //pw.close();
+            }
+            catch(Exception e){
+
+            }
+
+        }
+
 
     }
 }

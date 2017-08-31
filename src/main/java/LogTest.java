@@ -5,6 +5,11 @@ public class LogTest {
     public static void main(String[] args){
         Log logo = new Log("","");
         //log.leer();
+        logo.escribir("hola");
+        logo.escribir("1");
+        logo.escribir("2");
+        logo.escribir("3");
+        logo.escribir("chau");
         logo.leer();
 
     }
