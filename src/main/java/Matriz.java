@@ -150,7 +150,12 @@ public class Matriz{
     int [][] arreglo = transpuesta.getMatriz();
     for (int i = 0; i < transpuesta.getM(); i++) {
       for (int j = 0; j < transpuesta.getN(); j++) {
-        matriz=matriz + " "+arreglo[i][j];
+        String numero = Integer.toString(arreglo[i][j]);
+        while(numero.length()<4){
+          numero=" "+numero;
+        }
+        matriz= matriz+numero;
+
 
       }
       matriz=matriz+"\n";

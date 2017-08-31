@@ -13,7 +13,7 @@ public class Monitor{
   private RdP petri;
   private List<Hilo> listaHilos;
   private Map<Integer,Hilo> mapa;
-  //private Constantes constantes;
+  private Constantes constantes;
   private List <Hilo> Vs;  // Lista de hilos sensibilizados (Vendria a ser senzibilizadas())
   private List <Hilo> Vc;  // Lista de hilos encolados porque sus transiciones no estaban sensibilizadas
   private List <Hilo> estaEnAmbas;  // Lista de hilos que estan en las dos listas de arriba
@@ -28,7 +28,7 @@ public class Monitor{
     //mutex = new Semaphore(1, true);
     mutex = new Semaforo(1,true);
     k=true;
-    //constantes = new Constantes();
+    this.constantes = constantes;
     petri = new RdP(constantes.marcadoInicial, constantes.incidenciaPrevia, constantes.incidenciaPosterior,constantes.PInvariante);
     listaHilos= new ArrayList <Hilo>();
     mapa = new HashMap<Integer,Hilo>();
@@ -103,9 +103,16 @@ public class Monitor{
             k = petri.disparar(transicion);   // Disparo la transicion
 
           if (k == true) {
-
-            this.log.escribir("Contador "+ this.getPetri().contador,log.getRegistro());
+              this.log.escribir("------------------------------------------------------------------------------------------------------------------",log.getRegistro());
+            this.log.escribir("Contador de disparos : "+ this.getPetri().contador,log.getRegistro());
+              this.log.escribir("Se ha disparado la transicion  : " + traducirDisparo(transicion),log.getRegistro());
+              //this.log.escribir("Contador "+ this.getPetri().contador,log.getRegistro());
+              this.log.escribir("Marcado Actual : ",log.getRegistro());
+              this.log.escribir("  M1  M2  M3  M4 P10 P11 P12 P13 P14 P15 P16 P17 P18 P20 P21 P22 P23 P30 P31 P32 P33 P34 P35  R1  R2  R3  s1  s2",log.getRegistro());
             this.log.escribir(this.getPetri().marcadoActual().toString(),log.getRegistro());
+             // this.log.escribir("----------------------------------------------------------------------",log.getRegistro());
+
+
             this.log.escribir(this.getPetri().marcadoActual().toString(),log.getMarcados());
 
 
@@ -257,6 +264,12 @@ public class Monitor{
   }
   public RdP getPetri(){
     return this.petri;
+  }
+
+  public String traducirDisparo(int i){
+      String transicion = constantes.nombreTransiciones[i];
+      return transicion;
+
   }
 
 
