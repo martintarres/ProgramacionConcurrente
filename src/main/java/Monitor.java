@@ -37,7 +37,10 @@ public class Monitor{
     estaEnAmbas= new ArrayList <Hilo>();
     colas=new Colas();
     m=0;
-    this.log = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
+
+    this.log = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt",
+            "C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\registro.txt");
+    log.limpiar();
 
   }
 
@@ -100,14 +103,10 @@ public class Monitor{
             k = petri.disparar(transicion);   // Disparo la transicion
 
           if (k == true) {
-            /*System.out.println("Estado de los Thread: ");
-            for (Hilo h : mapa.values()) {
-              System.out.println(h + " esta : " + h.getState());
-            }*/
-            System.out.println("Marcado Actual = ");
-            System.out.print(petri.marcadoActual().toString());
 
-            this.log.escribir(this.getPetri().marcadoActual().toString());
+            this.log.escribir("Contador "+ this.getPetri().contador,log.getRegistro());
+            this.log.escribir(this.getPetri().marcadoActual().toString(),log.getRegistro());
+            this.log.escribir(this.getPetri().marcadoActual().toString(),log.getMarcados());
 
 
             Vs = getHilosSensibilizados();    // armo la lista de hilos sensibilizados

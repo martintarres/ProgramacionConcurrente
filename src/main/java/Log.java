@@ -4,22 +4,19 @@
 import java.io.*;
 
 public class Log {
-    private File archivoOrigen;
-    private File archivoDestino;
-    private String origen;
-    private String destino;
-    private String texto;
+    private File marcados;
+    private File registro;
+    private String direccionMarcado;
+    private String direccionRegistro;
     private BufferedReader br;
     private PrintWriter pw;
     private BufferedWriter bw;
 
-    public Log(String archivo){
-        this.origen = origen;
-        this.destino = destino;
-        this.archivoOrigen = new File(archivo);
-        this.archivoDestino = new File(archivo);
-        //this.archivoOrigen = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
-        //this.archivoDestino = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
+    public Log(String marcados,String registro){
+        this.direccionMarcado = marcados;
+        this.direccionRegistro = registro;
+        this.marcados = new File(marcados);
+        this.registro = new File(registro);
 
     }
     public void leer(){
@@ -29,7 +26,7 @@ public class Log {
          // String direccion =  "C:\\Users\\Fabrito\\Desktop\\Materias\\ProgramacionConcurrente\\Tp final\\src\\texto.txt";
 
           //System.out.println("---------");
-          FileReader fr = new FileReader(this.archivoOrigen);
+          FileReader fr = new FileReader(this.marcados);
           br = new BufferedReader(fr);
           String linea;
             while((linea=br.readLine())!=null)
@@ -48,9 +45,9 @@ public class Log {
 
         }
     }
-    public void escribir(String linea){
+    public void escribir(String linea,File destino){
         try{
-            FileWriter fw = new FileWriter(archivoDestino,true);
+            FileWriter fw = new FileWriter(destino,true);
             //fw.write(linea);
 
             //pw = new PrintWriter(fw);
@@ -74,5 +71,20 @@ public class Log {
         }
 
 
+    }
+    public File getMarcados(){
+        return this.marcados;
+    }
+    public File getRegistro(){
+        return this.registro;
+    }
+
+    public  void limpiar(){
+        if(this.marcados.exists())
+        this.marcados.delete();
+        this.marcados=new File(direccionMarcado);
+        if(this.registro.exists())
+            this.registro.delete();
+        this.registro=new File(direccionRegistro);
     }
 }
