@@ -144,5 +144,19 @@ public class Matriz{
 
 
   }
+  public String toString(){
+    String matriz = "";
+    Matriz transpuesta = this.transpuesta();
+    int [][] arreglo = transpuesta.getMatriz();
+    for (int i = 0; i < transpuesta.getM(); i++) {
+      for (int j = 0; j < transpuesta.getN(); j++) {
+        matriz=matriz + " "+arreglo[i][j];
+
+      }
+      matriz=matriz+"\n";
+
+    }
+    return matriz;
+  }
 
 }

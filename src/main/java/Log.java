@@ -13,11 +13,13 @@ public class Log {
     private PrintWriter pw;
     private BufferedWriter bw;
 
-    public Log(String origen, String destino){
+    public Log(String archivo){
         this.origen = origen;
         this.destino = destino;
-        this.archivoOrigen = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
-        this.archivoDestino = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
+        this.archivoOrigen = new File(archivo);
+        this.archivoDestino = new File(archivo);
+        //this.archivoOrigen = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
+        //this.archivoDestino = new File("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
 
     }
     public void leer(){

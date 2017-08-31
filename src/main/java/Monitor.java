@@ -20,6 +20,7 @@ public class Monitor{
   private Colas colas;
   private int m;
   private Hilo hiloDesencolado;
+  private Log log;
   //private List<Object>
 
   public Monitor(Constantes constantes) {
@@ -36,6 +37,8 @@ public class Monitor{
     estaEnAmbas= new ArrayList <Hilo>();
     colas=new Colas();
     m=0;
+    this.log = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt");
+
   }
 
   public void dispararTransicion(int transicion)  {
@@ -101,6 +104,11 @@ public class Monitor{
             for (Hilo h : mapa.values()) {
               System.out.println(h + " esta : " + h.getState());
             }*/
+            System.out.println("Marcado Actual = ");
+            System.out.print(petri.marcadoActual().toString());
+
+            this.log.escribir(this.getPetri().marcadoActual().toString());
+
 
             Vs = getHilosSensibilizados();    // armo la lista de hilos sensibilizados
             for(Hilo h : Vs){
