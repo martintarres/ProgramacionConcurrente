@@ -47,47 +47,47 @@ public class Principal {
       //  l2.add(constantes.arregloT.get(13));
 
 
-        /*l3.add(constantes.t10);
+        l3.add(0);
 
 
-        l4.add(constantes.t11);
+        l4.add(1);
 
 
-        l5.add(constantes.t13);
-        l5.add(constantes.t15);
-        l5.add(constantes.t17);
+        l5.add(3);
+        l5.add(5);
+        l5.add(7);
 
-        l6.add(constantes.t12);
-        l6.add(constantes.t14);
-        l6.add(constantes.t16);
-        l6.add(constantes.t18);
+        l6.add(2);
+        l6.add(4);
+        l6.add(6);
+        l6.add(8);
 
-        l7.add(constantes.t19);
+        l7.add(9);
 
-        l8.add(constantes.t35);
-        l8.add(constantes.t36);
+        l8.add(18);
+        l8.add(19);
 
-        l9.add(constantes.t31);
-        l9.add(constantes.t32);
-        l9.add(constantes.t33);
-        l9.add(constantes.t34);
-*/
+        l9.add(14);
+        l9.add(15);
+        l9.add(16);
+        l9.add(17);
+
 
         Hilo h1 = new Hilo("Hilo 1",l1, monitor);
         Hilo h2 = new Hilo("Hilo 2",l2, monitor);
 
-     /*   Hilo h3 = new Hilo("Hilo 3",l3, monitor);
+        Hilo h3 = new Hilo("Hilo 3",l3, monitor);
         Hilo h4 = new Hilo("Hilo 4",l4, monitor);
         Hilo h5 = new Hilo("Hilo 5",l5, monitor);
         Hilo h6 = new Hilo("Hilo 6",l6, monitor);
         Hilo h7 = new Hilo("Hilo 7",l7, monitor);
         Hilo h8 = new Hilo("Hilo 8",l8, monitor);
         Hilo h9 = new Hilo("Hilo 9",l9, monitor);
-*/
+
 
         monitor.mapeo(h1);
         monitor.mapeo(h2);
-/*
+
         monitor.mapeo(h3);
         monitor.mapeo(h4);
         monitor.mapeo(h5);
@@ -97,12 +97,12 @@ public class Principal {
         monitor.mapeo(h9);
 
        // monitor.showMapa();
-*/
+
 
 
         h1.start();
         h2.start();
-/*
+
 
         h3.start();
         h4.start();
@@ -111,7 +111,7 @@ public class Principal {
         h7.start();
         h8.start();
         h9.start();
-*/
+
 
 
     }
