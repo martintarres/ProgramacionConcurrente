@@ -107,6 +107,7 @@ public class Monitor{
             this.log.escribir("Contador de disparos : "+ this.getPetri().contador,log.getRegistro());
               this.log.escribir(((Hilo)(Thread.currentThread())).getNombre()+" ha disparado la transicion  : " + traducirDisparo(transicion),log.getRegistro());
               //this.log.escribir("Contador "+ this.getPetri().contador,log.getRegistro());
+            this.log.escribir("\n",log.getRegistro());
               this.log.escribir("Marcado Actual : ",log.getRegistro());
               this.log.escribir("  M1  M2  M3  M4 P10 P11 P12 P13 P14 P15 P16 P17 P18 P20 P21 P22 P23 P30 P31 P32 P33 P34 P35  R1  R2  R3  s1  s2",log.getRegistro());
             this.log.escribir(this.getPetri().marcadoActual().toString(),log.getRegistro());
@@ -117,9 +118,22 @@ public class Monitor{
 
 
             Vs = getHilosSensibilizados();    // armo la lista de hilos sensibilizados
+            String sensi="Hilos sensibilizados : ";
             for(Hilo h : Vs){
-              System.out.println("Hilos sensibilizados : " + h);
+              sensi = sensi + h.getNombre() +" || " ;
             }
+            this.log.escribir("\n",log.getRegistro());
+            this.log.escribir(sensi,log.getRegistro());
+
+
+
+
+            String enco="Hilos encolados : ";
+            for(Hilo h : Vc){
+              enco = enco + h.getNombre() +" || " ;
+            }
+
+            this.log.escribir(enco,log.getRegistro());
             //Vc = mutex.getQueue();      // armo la lista de hilos encolados sensibilizados
 
            // System.out.println("Hilos encolados : "+ Vc);
@@ -132,6 +146,12 @@ public class Monitor{
             if (estaEnAmbas.size()!=0) {
               //aca deberiamos ver en las politicas
                 //Que recoja el primero encolado
+              String ambas="Hilos en ambas : ";
+              for(Hilo h : estaEnAmbas){
+                ambas = ambas + h.getNombre() +" || " ;
+              }
+
+              this.log.escribir(ambas,log.getRegistro());
 
 
                 synchronized(estaEnAmbas.get(0).getLock()){
