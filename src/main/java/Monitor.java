@@ -21,6 +21,10 @@ public class Monitor{
   private int m;
   private Hilo hiloDesencolado;
   private Log log;
+  private int piezaA;
+  private int piezaB;
+  private int piezaC;
+  private boolean cambio;
   //private List<Object>
 
   public Monitor(Constantes constantes) {
@@ -36,7 +40,12 @@ public class Monitor{
     Vc= new ArrayList <Hilo>();
     estaEnAmbas= new ArrayList <Hilo>();
     colas=new Colas();
+    this.piezaA=0;
+    this.piezaB=0;
+    this.piezaC=0;
+    this.cambio=false;
     m=0;
+
 
     this.log = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt",
             "C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\registro.txt");
@@ -103,10 +112,28 @@ public class Monitor{
             k = petri.disparar(transicion);   // Disparo la transicion
 
           if (k == true) {
+             cambio = false;
+            if(transicion==9){
+              piezaA++;
+              cambio=true;
+            }
+            if(transicion==13){
+              piezaB++;
+              cambio=true;
+            }
+            if(transicion==19){
+              piezaC++;
+              cambio=true;
+            }
               this.log.escribir("------------------------------------------------------------------------------------------------------------------",log.getRegistro());
             this.log.escribir("Contador de disparos : "+ this.getPetri().contador,log.getRegistro());
               this.log.escribir(((Hilo)(Thread.currentThread())).getNombre()+" ha disparado la transicion  : " + traducirDisparo(transicion),log.getRegistro());
               //this.log.escribir("Contador "+ this.getPetri().contador,log.getRegistro());
+              if(cambio){
+                this.log.escribir("Cantidad de piezas producidas:  "+"A = "+piezaA +"   B = "+piezaB+"   C = "+piezaC,log.getRegistro());
+              }
+              cambio=false;
+
             this.log.escribir("\n",log.getRegistro());
               this.log.escribir("Marcado Actual : ",log.getRegistro());
               this.log.escribir("  M1  M2  M3  M4 P10 P11 P12 P13 P14 P15 P16 P17 P18 P20 P21 P22 P23 P30 P31 P32 P33 P34 P35  R1  R2  R3  s1  s2",log.getRegistro());
