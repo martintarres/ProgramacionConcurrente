@@ -25,6 +25,7 @@ public class Monitor{
   private int piezaB;
   private int piezaC;
   private boolean cambio;
+  private Politica politica;
   //private List<Object>
 
   public Monitor(Constantes constantes) {
@@ -44,6 +45,7 @@ public class Monitor{
     this.piezaB=0;
     this.piezaC=0;
     this.cambio=false;
+    this.politica = new PoliticaRandom();
     m=0;
 
 
@@ -182,14 +184,20 @@ public class Monitor{
 
 
                 synchronized(estaEnAmbas.get(0).getLock()){
-                    Hilo desencolado = estaEnAmbas.get(0);
+                    Hilo desencolado = politica.getHilo(estaEnAmbas);
+                    //Hilo desencolado = estaEnAmbas.get(0);
 
                     Vc.remove(desencolado);
 
                     //k=false;
                     //Vc.add((Hilo) Thread.currentThread());
+                    synchronized(desencolado.getLock()){
+                        desencolado.getLock().notify();
+                        //((Hilo) Thread.currentThread()).getLock().wait();
 
-                    desencolado.getLock().notify();
+                    }
+
+                    //desencolado.getLock().notify();
                     return;
                     //((Hilo) Thread.currentThread()).getLock().wait();
                     //break;
