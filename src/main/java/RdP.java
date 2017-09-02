@@ -77,25 +77,25 @@ public class RdP{
 
 
   public boolean disparar(int x) throws RdPException{
-    System.out.println("entre a disparar con " + x);
+    //System.out.println("entre a disparar con " + x);
     try{
-      System.out.println("entre al try con  " + x);
+      //System.out.println("entre al try con  " + x);
       if(x<0||x>this.incidencia.getMatriz()[0].length){
         throw new RdPException("Transicion no valida.");
       }
       if(this.vectorSensibilizadas.getMatriz()[0][x]!=0){
         this.marcadoActual = Matriz.suma(this.marcadoActual,Matriz.obtenerColumna(this.incidencia,x));
         vectorSensibilizadas = Sensibilizadas(this.incidenciaPrevia,this.marcadoActual);
-        System.out.println("el hilo " + ((Hilo)(Thread.currentThread())).getNombre() + " disparo " + x);
-        vectorSensibilizadas.imprimir();
+        //System.out.println("el hilo " + ((Hilo)(Thread.currentThread())).getNombre() + " disparo " + x);
+        //vectorSensibilizadas.imprimir();
         contador++;
         System.out.println("soy contador " + contador);
         return true;
       }
       else{
-        System.out.println("el hilo " + ((Hilo)(Thread.currentThread())).getNombre()+ " no pudo disparar " + x);
-        System.out.println("no pude disparar por no estar sensibilizada, queda igual");
-        vectorSensibilizadas.imprimir();
+        //System.out.println("el hilo " + ((Hilo)(Thread.currentThread())).getNombre()+ " no pudo disparar " + x);
+        //System.out.println("no pude disparar por no estar sensibilizada, queda igual");
+        //vectorSensibilizadas.imprimir();
         return false;
       }
 

@@ -45,7 +45,7 @@ public class Monitor{
     this.piezaB=0;
     this.piezaC=0;
     this.cambio=false;
-    this.politica = new PoliticaRandom();
+    this.politica = new PoliticaA2BC(new ArrayList<>(mapa.values()));
     m=0;
 
 
@@ -96,7 +96,7 @@ public class Monitor{
         // MANDO A DORMIR UN RATO AL HIJO DE PUTA PORQUE EL SCHEDULER DE JAVA NO CORRE EL OTRO
 
           Thread.currentThread().sleep(10);
-          System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
+          //System.out.println("El hilo " + Thread.currentThread() + " se lleva  el mutex");
          // System.out.println("Threads  esperando por  el mutex  " +  mutex.getQueue());
          // System.out.println("Estado de los Hilos: ");
 
@@ -302,8 +302,8 @@ public class Monitor{
   public List<Hilo> and(){
     List<Hilo> and = new ArrayList<Hilo>();
     try{
-      for(Hilo s : Vs){
-        for(Hilo c : Vc){
+      for(Hilo s : Vc){
+        for(Hilo c : Vs){
           if(s.equals(c)&&!(and.contains(s))){
             and.add(s);
 
