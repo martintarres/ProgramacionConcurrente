@@ -45,7 +45,7 @@ public class Monitor{
     this.piezaB=0;
     this.piezaC=0;
     this.cambio=false;
-    this.politica = new PoliticaA2BC(new ArrayList<>(mapa.values()));
+    this.politica = new PoliticaFIFO(new ArrayList<>(mapa.values()));
     m=0;
 
 

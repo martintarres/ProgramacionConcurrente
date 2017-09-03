@@ -144,6 +144,29 @@ public class Matriz{
 
 
   }
+  public boolean esIgual( Matriz B){
+    if(B==null){
+      return false;
+    }
+    if((this.getM()!=B.getM())||(this.getN()!=B.getN())){
+      return false;
+    }
+    else{
+      int [][] a = this.getMatriz();
+      int [][] b = B.getMatriz();
+      for (int i = 0; i < this.getM(); i++) {
+        for (int j = 0; j < this.getN(); j++) {
+          if(a[i][j]!=b[i][j]){
+            return false;
+          }
+
+        }
+
+      }
+      return true;
+    }
+
+  }
   public String toString(){
     String matriz = "";
     Matriz transpuesta = this.transpuesta();
