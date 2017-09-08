@@ -113,12 +113,18 @@ public class Monitor{
 
         while (k == true) {     // Si k es true
             //Thread.currentThread().sleep(500);
+          Matriz previo = this.petri.marcadoActual().clonar();
+          int Buffersize=Vc.size();
             k = petri.disparar(transicion);   // Disparo la transicion
 
           if (k == true) {
 
+
+
             assert  ((Hilo) Thread.currentThread()).verificarSecuenciaT(transicion);
             ((Hilo) Thread.currentThread()).incrementarContador();
+            assert this.getPetri().verificarDisparo(previo,this.petri.marcadoActual(),transicion);
+            assert (Buffersize==Vc.size());
 
              cambio = false;
             if(transicion==9){
@@ -230,6 +236,7 @@ public class Monitor{
               //System.out.println("Hilos encolados: " + Vc);
             assert BufferOverflow();
             assert encoladosRepetidos();
+            assert (Buffersize+1==Vc.size());
               mutex.release();
               //Thread.currentThread().sleep(100);
 
@@ -335,7 +342,7 @@ public class Monitor{
 
   }
 
-  public boolean BufferOverflow(){
+  public boolean BufferOverflow(){    //231
     /*
     //Verifica que no haya más hilos encolados de los que se inicializaron
     //También podría veriicar que al menos uno esté vivo al compararlo con this.MaxBuffer -1
@@ -343,7 +350,7 @@ public class Monitor{
     return this.Vc.size()<this.MaxBuffer;
   }
 
-  public boolean encoladosRepetidos(){
+  public boolean encoladosRepetidos(){    //232
 
     for (Hilo h : this.Vc) {
       int cantidad=0;

@@ -187,4 +187,21 @@ public class Matriz{
     return matriz;
   }
 
+  public Matriz clonar() throws MatrizException{
+    try{
+      int [][] arreglo = new int[this.getM()][this.getN()];
+      for (int i = 0; i < this.getM(); i++) {
+        for (int j = 0; j < this.getN(); j++) {
+          arreglo[i][j] = this.getMatriz()[i][j];
+        }
+      }
+
+      return  new Matriz(arreglo);
+    }catch (Exception e){
+      throw e;
+    }
+
+  }
+
+
 }
