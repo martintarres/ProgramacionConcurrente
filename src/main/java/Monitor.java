@@ -229,6 +229,7 @@ public class Monitor{
               Vc.add((Hilo) Thread.currentThread());
               //System.out.println("Hilos encolados: " + Vc);
             assert BufferOverflow();
+            assert encoladosRepetidos();
               mutex.release();
               //Thread.currentThread().sleep(100);
 
@@ -340,6 +341,23 @@ public class Monitor{
     //También podría veriicar que al menos uno esté vivo al compararlo con this.MaxBuffer -1
      */
     return this.Vc.size()<this.MaxBuffer;
+  }
+
+  public boolean encoladosRepetidos(){
+
+    for (Hilo h : this.Vc) {
+      int cantidad=0;
+      for (Hilo r : Vc) {
+        if(h.equals(r)){
+          cantidad++;
+        }
+
+      }
+      if(cantidad!=1){
+        return false;
+      }
+    }
+    return true;
   }
 
 
