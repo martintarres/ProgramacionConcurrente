@@ -26,6 +26,7 @@ public class Monitor{
   private int piezaC;
   private boolean cambio;
   private Politica politica;
+  private int MaxBuffer;
   //private List<Object>
 
   public Monitor(Constantes constantes) {
@@ -47,6 +48,7 @@ public class Monitor{
     this.cambio=false;
     this.politica = new PoliticaFIFO(new ArrayList<>(mapa.values()));
     m=0;
+    this.MaxBuffer = 9;
 
 
     this.log = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt",
@@ -226,6 +228,7 @@ public class Monitor{
 
               Vc.add((Hilo) Thread.currentThread());
               //System.out.println("Hilos encolados: " + Vc);
+            assert BufferOverflow();
               mutex.release();
               //Thread.currentThread().sleep(100);
 
@@ -329,6 +332,14 @@ public class Monitor{
       String transicion = constantes.nombreTransiciones[i];
       return transicion;
 
+  }
+
+  public boolean BufferOverflow(){
+    /*
+    //Verifica que no haya más hilos encolados de los que se inicializaron
+    //También podría veriicar que al menos uno esté vivo al compararlo con this.MaxBuffer -1
+     */
+    return this.Vc.size()<this.MaxBuffer;
   }
 
 
