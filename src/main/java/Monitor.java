@@ -7,10 +7,10 @@ import java.util.concurrent.Semaphore;
 
 public class Monitor{
   CountDownLatch contador;
-  private Semaforo mutex;
+  public Semaforo mutex;
   //private Semaphore mutex;
   private boolean k;
-  private RdP petri;
+  public RdP petri;
   private List<Hilo> listaHilos;
   private Map<Integer,Hilo> mapa;
   private Constantes constantes;
@@ -114,6 +114,10 @@ public class Monitor{
             k = petri.disparar(transicion);   // Disparo la transicion
 
           if (k == true) {
+
+            assert  ((Hilo) Thread.currentThread()).verificarSecuenciaT(transicion);
+            ((Hilo) Thread.currentThread()).incrementarContador();
+
              cambio = false;
             if(transicion==9){
               piezaA++;
