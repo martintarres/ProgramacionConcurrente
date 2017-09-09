@@ -40,6 +40,8 @@ public class Principal {
         monitor.mapeo(h7);
         monitor.mapeo(h8);
         monitor.mapeo(h9);
+        monitor.setearAntPost();
+        monitor.showHilos();
 
         h1.start();
         h2.start();

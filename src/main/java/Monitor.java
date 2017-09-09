@@ -51,6 +51,7 @@ public class Monitor{
     this.MaxBuffer = 9;
 
 
+
     this.log = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt",
             "C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\registro.txt");
     log.limpiar();
@@ -120,7 +121,7 @@ public class Monitor{
           if (k == true) {
 
 
-
+            assert ((Hilo)(Thread.currentThread())).verificarVueltas();
             assert  ((Hilo) Thread.currentThread()).verificarSecuenciaT(transicion);
             ((Hilo) Thread.currentThread()).incrementarContador();
             assert this.getPetri().verificarDisparo(previo,this.petri.marcadoActual(),transicion);
@@ -314,6 +315,14 @@ public class Monitor{
       System.out.println("Transicion " + i + " correspondiente al hilo  "+ this.mapa.get(i));
     }
   }
+  public void showHilos(){
+    for (Hilo h :
+            mapa.values()) {
+      System.out.println(h.getNombre() + " = "+h.anteriores + " | "+h.posteriores);
+
+    }
+  }
+
   public List<Hilo> and(){
     List<Hilo> and = new ArrayList<Hilo>();
     try{
@@ -365,6 +374,57 @@ public class Monitor{
       }
     }
     return true;
+  }
+  public Hilo buscarHilo(String nombre){
+    for (Hilo h : mapa.values()) {
+      if(h.getNombre().equals(nombre)){
+        return h;
+      }
+
+    }
+    return null;
+  }
+  public void setearAntPost(){
+    for (Hilo h : this.mapa.values()) {
+      switch (h.getNombre()){
+        case "Hilo 1": h.agregarPosterior(buscarHilo("Hilo 2"));
+          break;
+
+        case "Hilo 2": h.agregarAnterior(buscarHilo("Hilo 1"));
+          break;
+
+        case "Hilo 3": h.agregarPosterior(buscarHilo("Hilo 4"));
+                        h.agregarPosterior(buscarHilo("Hilo 6"));
+          break;
+
+        case "Hilo 4": h.agregarAnterior(buscarHilo("Hilo 3"));
+                        h.agregarPosterior(buscarHilo("Hilo 5"));
+          break;
+
+        case "Hilo 5": h.agregarAnterior(buscarHilo("Hilo 4"));
+                      h.agregarPosterior(buscarHilo("Hilo 7"));
+          break;
+
+        case "Hilo 6": h.agregarAnterior(buscarHilo("Hilo 3"));
+                        h.agregarPosterior(buscarHilo("Hilo 7"));
+          break;
+
+        case "Hilo 7": h.agregarAnterior(buscarHilo("Hilo 5"));
+                        h.agregarAnterior(buscarHilo("Hilo 6"));
+          break;
+
+        case "Hilo 8": h.agregarAnterior(buscarHilo("Hilo 9"));
+          break;
+
+        case "Hilo 9": h.agregarPosterior(buscarHilo("Hilo 8"));
+          break;
+
+        default: break;
+
+
+      }
+
+    }
   }
 
 

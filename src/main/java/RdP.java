@@ -7,7 +7,7 @@ public class RdP{
   private Matriz incidencia;
   private Matriz incidenciaPrevia;
   private Matriz incidenciaPosterior;
-  private Matriz vectorSensibilizadas;
+  public Matriz vectorSensibilizadas;
   private Matriz MInvariantes;
   public List<PInvariante> listaPI;
 
@@ -175,6 +175,17 @@ public class RdP{
 
     }
     return true;
+  }
+
+  public boolean verificarDisparo(Matriz anterior, Matriz actual, int disparo){   // Monitor 123
+    // Verificaria, usado desde el monitor, que el cambio de marcado coincide con el que provoca el disparo
+    try{
+
+      return actual.esIgual(Matriz.suma(anterior,Matriz.obtenerColumna(this.incidencia,disparo)));
+
+    }catch(Exception e){
+      return false;
+    }
   }
 
 
