@@ -1,10 +1,12 @@
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class transicionSensiblizadasTest {
     Constantes constantes;
     Monitor monitor;
+    Matriz marcadoTemporal;
 
     @Test
     public void testSensibilizadasPositivo(){
@@ -20,10 +22,17 @@ public class transicionSensiblizadasTest {
                 monitor.petri.getVectorSensibilizadas().imprimir();
                 System.out.println("voy a intentar disparar con " + transiciones[i]);
                 assertEquals(1,monitor.petri.getVectorSensibilizadas().getMatriz()[0][transiciones[i]] );
-                monitor.dispararTransicion(transiciones[i]);
-                monitor.petri.getVectorSensibilizadas().imprimir();
+                marcadoTemporal=monitor.getPetri().marcadoActual();
+            try {
+                monitor.getPetri().disparar(transiciones[i]);
+            } catch (RdPException e) {
+                e.printStackTrace();
+            }
                 monitor.mutex.release();
-                assertEquals(0,monitor.petri.getVectorSensibilizadas().getMatriz()[0][transiciones[i]] );
+
+                monitor.getPetri().marcadoActual().imprimir();
+                assertNotSame(marcadoTemporal,monitor.getPetri().marcadoActual());
+
 
 
 
@@ -42,17 +51,20 @@ public class transicionSensiblizadasTest {
 
         for(int i=0; i<3;i++) {
 
-            vectorSensibilizadasOriginal=monitor.petri.getVectorSensibilizadas();
+
             System.out.println("voy a mostrar vector sensibilizados");
             monitor.petri.getVectorSensibilizadas().imprimir();
             System.out.println("voy a intentar disparar con " + transiciones[i]);
             assertEquals(0,monitor.petri.getVectorSensibilizadas().getMatriz()[0][transiciones[i]] );
-            monitor.dispararTransicion(transiciones[i]);
+            marcadoTemporal=monitor.getPetri().marcadoActual();
+            try {
+                monitor.getPetri().disparar(transiciones[i]);
+            } catch (RdPException e) {
+                e.printStackTrace();
+            }
             monitor.petri.getVectorSensibilizadas().imprimir();
             monitor.mutex.release();
-            assertEquals(0,monitor.petri.getVectorSensibilizadas().getMatriz()[0][transiciones[i]] );
-
-            assertSame(vectorSensibilizadasOriginal,monitor.petri.getVectorSensibilizadas());
+            assertSame(marcadoTemporal, monitor.getPetri().marcadoActual());
 
         }
     }
