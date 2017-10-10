@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 
-public class noSeQueTest {
+public class PInvariantesTest {
     Constantes constantes;
     Monitor monitor;
     List fin;
