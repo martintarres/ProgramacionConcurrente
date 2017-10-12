@@ -16,8 +16,8 @@ public class PInvarianteTest {
     @Test
     public void HistorialMarcados  () throws Exception{
 
-        Log lector = new Log("C:\\Users\\alexa\\Desktop\\Concu\\ProgramacionConcurrente\\marcados.txt",
-                "\"C:\\\\Users\\\\alexa\\\\Desktop\\\\Concu\\\\ProgramacionConcurrente\\\\registroVacio.txt\"");
+        Log lector = new Log("C:\\Users\\alexa\\Desktop\\CONCURRENTE\\ProgramacionConcurrente\\marcados.txt",
+                "\"C:\\\\Users\\\\alexa\\\\Desktop\\\\CONCURRENTE\\\\ProgramacionConcurrente\\\\registroVacio.txt\"");
         // creo una lista de as lineas
         List<String> Lineas = lector.leerLineas();
         System.out.println("Cantidad de Marcados a testear : " + Lineas.size());

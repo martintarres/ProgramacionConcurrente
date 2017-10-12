@@ -1,7 +1,10 @@
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import static junit.framework.TestCase.assertSame;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertNotSame;
+//import static org.junit.jupiter.api.Assertions.*;
 
 public class transicionSensiblizadasTest {
     Constantes constantes;
