@@ -203,5 +203,34 @@ public class Matriz{
 
   }
 
+  public static Matriz matrizVacia(int m, int n) throws Exception{
+    try{
+      int[][] vacia = new int[m][n];
+      return new Matriz(vacia);
+
+    }
+    catch(Exception e){
+      throw new Exception("No se pudo crear la matriz de ceros");
+    }
+  }
+
+  public void and(Matriz A,Matriz B) throws Exception {
+    if (A.getM() != B.getM() || A.getN() != B.getN()) {
+      throw new Exception("Matrices de dimensiones incompatibles");
+    }
+    int[][] a = A.getMatriz();
+    int[][] b = B.getMatriz();
+    int[][] c = this.getMatriz();
+
+    for (int i = 0; i < A.getM(); i++) {
+
+      for (int j = 0; j < A.getN(); j++) {
+        c[i][j] = a[i][j] * b[i][j];
+      }
+
+    }
+    return;
+  }
+
 
 }

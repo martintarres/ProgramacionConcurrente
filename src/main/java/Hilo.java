@@ -15,7 +15,7 @@ public class Hilo extends Thread {
     this.nombre = nombre;
     this.monitor = monitor;
     this.enteros=enteros;
-    lock = new Object();
+    //lock = new Object();
     this.contadorDisparos = 0;
     this.posteriores = new ArrayList<Hilo>();
     this.anteriores = new ArrayList<Hilo>();
@@ -31,7 +31,7 @@ public class Hilo extends Thread {
       while(true){
         for(Integer i : enteros)
         {
-          monitor.dispararTransicion(i.intValue());
+          monitor.dispararTransicion(i);
         }
 
       }
@@ -47,9 +47,10 @@ public class Hilo extends Thread {
   public List<Integer> getTransiciones(){
       return enteros;
   }
-  public Object getLock(){
+  /*public Object getLock(){
     return this.lock;
   }
+  */
 
   public  void incrementarContador(){
     this.contadorDisparos++;
