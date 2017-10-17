@@ -1,0 +1,53 @@
+Lista de test hechos y por hacer:
+
+1) Verificar disparo
+	Verificar usando marcadoACtual y previo
+
+2) Verificar que un hilo se encuentra dormido por una única transiciòn
+	Verlo desde el vectorEncolado
+
+3) El hilo no se encola dos veces.
+	No es necesario si no existe se aplica una cola de hilos dormidos
+
+4) Cuando no se dispara se encola.
+	Ver que antes no estaba  usando el VectorEncolados
+	Ver que después si está usando el vector
+
+5) Nunca se sobrepasa el buffer
+	Si se define una cola de hilos encolados, que el size no supere 9.
+	Si se trabaja desde el vectorEncolados, que la cantidad de unos no supere la 9.
+
+6)Cantidad de vueltas con respecto a cantidad de productos producidos
+	Es un bardo explicarlo, lo hago yo
+
+7) Cantiodad de vueltas respecto a la cantidad de hilos anteriores
+	Igual de bardo
+
+8) Un hilo no comienza a dispara su primera transición hasta que su alguno de sus hilos anteriores no haya disparado su última
+	
+
+9) P Invariante
+
+10) T invariante
+
+11) Historial de disparo 
+	Usnado un historial de disparos, verificar que desde el marcado inicial se llega al actual
+	Por ahí hay que definir unas funciones de matrices
+
+12) Que se disparen sólo los sensibilizados
+
+13) Un hilo no puede estar sensibilizados por dos transiciones
+	Creo que esto es chamuyo
+
+16) Ver que haya , como máximo, sólo un hilo activo usando el monitor 
+	Por ahí hay que definir zona del monitor en la que puede haber un hilo con un booleano
+
+18) Si se puede acceder a la cola del mutex de monitor, que un hilo que esté encolado por el mutex no esté encolado por falta de recursos
+	Es medio jodido
+
+19) Cada 100 disparos todos los hilos deben haber estado sensibilizados al menos 1 vez
+
+20) Acotado el número de tokerns en todos los marcados
+
+22) Que coincida la transición con la qu un hilo se durmió con la transición a disparar
+	Fijarse en el contador del hilo y que coincida con lo de VectorEncolado 
