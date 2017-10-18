@@ -15,10 +15,10 @@ public class Monitor {
     private Matriz VectorSensibilizados;
     private Matriz VectorEncolados;
     private Matriz VectorAnd;
-    //private List<Hilo> Vs;  // Lista de hilos sensibilizados (Vendria a ser senzibilizadas())
+
     private List<Hilo> Vc;  // Lista de hilos encolados porque sus transiciones no estaban sensibilizadas
-    //private List<Hilo> estaEnAmbas;  // Lista de hilos que estan en las dos listas de arriba
-    private Colas colas;
+
+
     private int m;
     private Hilo hiloDesencolado;
     private Log log;
@@ -44,10 +44,9 @@ public class Monitor {
             VectorAnd = Matriz.matrizVacia(1, getPetri().getIncidenciaPrevia().getN());
 
 
-            //Vs = new ArrayList<Hilo>();
+
             Vc = new ArrayList<Hilo>();
-            //estaEnAmbas = new ArrayList<Hilo>();
-            colas = new Colas();
+
             this.piezaA = 0;
             this.piezaB = 0;
             this.piezaC = 0;
@@ -139,7 +138,10 @@ public class Monitor {
                         Integer locker = politica.getLock(VectorAnd);
                         VectorEncolados.getMatriz()[0][locker]=0;
                         synchronized (locker) {
+                            assert BufferOverflow();
+                            Vc.remove(mapa.get(locker));
                             locker.notify();
+
                         }
 
                         return;
@@ -149,8 +151,9 @@ public class Monitor {
                     }
 
                 } else {
-
-                    //Vc.add((Hilo) Thread.currentThread());
+                    //assert (false);
+                    assert(previo.esIgual(getPetri().marcadoActual()));
+                    Vc.add((Hilo) Thread.currentThread());
                     //System.out.println("Hilos encolados: " + Vc);
                     assert BufferOverflow();
                     assert encoladosRepetidos();
