@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Hilo extends Thread {
 
@@ -29,6 +31,7 @@ public class Hilo extends Thread {
   public void run(){
     try{
       while(true){
+
         for(Integer i : enteros)
         {
           monitor.dispararTransicion(i);
@@ -99,9 +102,40 @@ public class Hilo extends Thread {
           }
 
       }
-      System.out.println("Hilo =" + ((Hilo)Thread.currentThread()).getNombre());
-      System.out.println("Vueltas anteriores = "+ vueltasAnteriores+"    Vueltas Paralelas =  "+ vueltasParalelas);
+      //System.out.println("Hilo =" + ((Hilo)Thread.currentThread()).getNombre());
+      //System.out.println("Vueltas anteriores = "+ vueltasAnteriores+"    Vueltas Paralelas =  "+ vueltasParalelas);
+      return vueltasAnteriores>=vueltasParalelas;
+  }
+
+  public boolean verificarInicio(){
+
+      if(this.anteriores.size()==0){
+          return true;
+      }
+      else{
+          for (Hilo h:
+               this.anteriores) {
+              if(h.getContadorDisparos()%h.getTransiciones().size()==0){
+                  return true;
+              }
+
+
+          }
+          return false;
+      }
+  }
+
+  public boolean verificarTransicionDormida(Matriz VectorEncolados, Map<Integer,Hilo> mapa){
+      for (int i = 0; i < VectorEncolados.getN(); i++) {
+          if(VectorEncolados.getMatriz()[0][i]==1){
+              Hilo h = mapa.get(i);
+              if(h.getTransiciones().get(h.getContadorDisparos()%h.getTransiciones().size())!=i){
+                  return false;
+              }
+          }
+      }
       return true;
+
   }
 
 

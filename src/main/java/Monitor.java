@@ -15,6 +15,7 @@ public class Monitor {
     private Matriz VectorSensibilizados;
     private Matriz VectorEncolados;
     private Matriz VectorAnd;
+    private Matriz VectorHistorialSensibilizadas;
 
     private List<Hilo> Vc;  // Lista de hilos encolados porque sus transiciones no estaban sensibilizadas
 
@@ -42,6 +43,7 @@ public class Monitor {
             VectorSensibilizados = RdP.Sensibilizadas(petri.getIncidenciaPrevia(), getPetri().marcadoActual());
             VectorEncolados = Matriz.matrizVacia(1, petri.getIncidenciaPrevia().getN());
             VectorAnd = Matriz.matrizVacia(1, getPetri().getIncidenciaPrevia().getN());
+            VectorHistorialSensibilizadas = Matriz.matrizVacia(1, petri.getIncidenciaPrevia().getN());
 
 
 
@@ -74,12 +76,24 @@ public class Monitor {
             k = true;
 
             while (k == true) {
+
                 Matriz previo = this.petri.marcadoActual().clonar();
                 int Buffersize = Vc.size();
                 k = petri.disparar(transicion);   // Disparo la transicion
 
+
                 if (k == true) {
+                    if(((Hilo) Thread.currentThread()).getContadorDisparos()%((Hilo) Thread.currentThread()).getTransiciones().size()==0){
+                        assert ((Hilo) Thread.currentThread()).verificarInicio();
+                    }
                     VectorSensibilizados = getPetri().vectorSensibilizadas;
+                    assert unicaTransicionPorHilo(VectorSensibilizados);
+                    VectorHistorialSensibilizadas.or(VectorHistorialSensibilizadas,VectorSensibilizados);
+
+                    assert (verificarHistorialSensibilizadas());
+                    if(this.getPetri().contador%500==0&&this.getPetri().contador!=0){
+                        this.VectorHistorialSensibilizadas = Matriz.matrizVacia(1, petri.getIncidenciaPrevia().getN());
+                    }
 
 
                     assert ((Hilo) (Thread.currentThread())).verificarVueltas();
@@ -154,12 +168,16 @@ public class Monitor {
                     //assert (false);
                     assert(previo.esIgual(getPetri().marcadoActual()));
                     Vc.add((Hilo) Thread.currentThread());
+                    assert (Vc.get(Vc.size()-1).equals((Hilo)Thread.currentThread()));
                     //System.out.println("Hilos encolados: " + Vc);
                     assert BufferOverflow();
+                    assert (cantidadDeUnos(VectorEncolados)<MaxBuffer);
                     assert encoladosRepetidos();
                     VectorEncolados.getMatriz()[0][transicion]=1;
                     assert (Buffersize + 1 == cantidadDeUnos(VectorEncolados));
                     mutex.release();
+                    assert unicaTransicionPorHilo(VectorEncolados);
+                    assert (((Hilo) Thread.currentThread()).verificarTransicionDormida(VectorEncolados,mapa));
 
                     synchronized (transicion) {
                         transicion.wait();
@@ -315,6 +333,41 @@ public class Monitor {
         }
         return cadena;
 
+    }
+
+    public boolean unicaTransicionPorHilo(Matriz Vector){
+
+        for (int i = 0; i < Vector.getN(); i++) {
+            if(Vector.getMatriz()[0][i]==1){
+                Hilo h = mapa.get(i);
+                int cantidad = 0;
+                for (int j = 0; j < Vector.getN(); j++) {
+                    if(Vector.getMatriz()[0][j]!=0&&mapa.get(j)==h){
+                        cantidad++;
+                    }
+
+                }
+                if(cantidad!=1){
+                    return false;
+                }
+
+            }
+
+        }
+        return true;
+    }
+
+    public boolean verificarHistorialSensibilizadas(){
+
+        return true;
+
+/*
+        if(this.getPetri().contador%500==0&&this.getPetri().contador!=0){
+            System.out.println(VectorHistorialSensibilizadas);
+            return (cantidadDeUnos(VectorHistorialSensibilizadas)==VectorHistorialSensibilizadas.getN());
+        }
+        else return true;
+*/
     }
 
     public void setearAntPost() {

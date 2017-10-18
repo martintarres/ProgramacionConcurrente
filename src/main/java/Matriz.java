@@ -231,6 +231,29 @@ public class Matriz{
     }
     return;
   }
+  public void or(Matriz A,Matriz B) throws Exception {
+    if (A.getM() != B.getM() || A.getN() != B.getN()) {
+      throw new Exception("Matrices de dimensiones incompatibles");
+    }
+    int[][] a = A.getMatriz();
+    int[][] b = B.getMatriz();
+    int[][] c = this.getMatriz();
+
+    for (int i = 0; i < A.getM(); i++) {
+
+      for (int j = 0; j < A.getN(); j++) {
+        if(a[i][j]==1 || b[i][j]==1){
+          c[i][j] = 1;
+        }
+        else{
+          c[i][j] = 0;
+        }
+
+      }
+
+    }
+    return;
+  }
 
 
 }

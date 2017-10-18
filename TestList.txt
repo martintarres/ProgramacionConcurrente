@@ -1,29 +1,36 @@
 Lista de test hechos y por hacer:
 
-1) Verificar disparo		Hecho
+1) Verificar disparo		HECHO
 	Verificar usando marcadoACtual y previo
 
-2) Verificar que un hilo se encuentra dormido por una única transiciòn		Falta
+2) Verificar No disparo		HECHO
+	
+
+2) Verificar que un hilo se encuentra dormido por una única transiciòn		HECHO con unicaTransicionPorHilo
 	Verlo desde el vectorEncolado
 
-3) El hilo no se encola dos veces.				Depende si defino una cola, pero está hecho
+3) El hilo no se encola dos veces.				Hecho con verificarEncolar o algo asi
 	No es necesario si no existe se aplica una cola de hilos dormidos
+	se fija en encoladosRepetidos()
 
-4) Cuando no se dispara se encola.				Hecho a medias, sólo analicé las variaciones del tamaño de la cola
+
+2  y 3 vendrían a ser casi lo mismo
+
+4) Cuando no se dispara se encola.				Me fijo en el último encolado si corresponde al currentThread
 	Ver que antes no estaba  usando el VectorEncolados
 	Ver que después si está usando el vector
 
-5) Nunca se sobrepasa el buffer				HECHO
+5) Nunca se sobrepasa el buffer				HECHO con Cantidad de unos del vector Encolados
 	Si se define una cola de hilos encolados, que el size no supere 9.
 	Si se trabaja desde el vectorEncolados, que la cantidad de unos no supere la 9.
 
 6)Cantidad de vueltas con respecto a cantidad de productos producidos		Falta poco pero HECHO
 	Es un bardo explicarlo, lo hago yo
 
-7) Cantiodad de vueltas respecto a la cantidad de hilos anteriores		Falta poco pero HEcho
+7) Cantiodad de vueltas respecto a la cantidad de hilos anteriores		HECHO con verificarVueltas
 	Igual de bardo
 
-8) Un hilo no comienza a dispara su primera transición hasta que su alguno de sus hilos anteriores no haya disparado su última		No me acuerdo si está hecho
+8) Un hilo no comienza a dispara su primera transición hasta que su alguno de sus hilos anteriores no haya disparado su última		HECHO con Verificar Inicio
 	
 
 9) P Invariante
@@ -36,7 +43,7 @@ Lista de test hechos y por hacer:
 
 12) Que se disparen sólo los sensibilizados		Por lo menos por mí no está hecho
 
-13) Un hilo no puede estar sensibilizados por dos transiciones			No hecho
+13) Un hilo no puede estar sensibilizados por dos transiciones			Hecho con unicaTransicion por hilo
 	Creo que esto es chamuyo
 
 16) Ver que haya , como máximo, sólo un hilo activo usando el monitor 		No hecho
@@ -45,10 +52,10 @@ Lista de test hechos y por hacer:
 18) Si se puede acceder a la cola del mutex de monitor, que un hilo que esté encolado por el mutex no esté encolado por falta de recursos		Ni a palos está hecho
 	Es medio jodido
 
-19) Cada 100 disparos todos los hilos deben haber estado sensibilizados al menos 1 vez			No hecho
+19) Cada 100 disparos todos los hilos deben haber estado sensibilizados al menos 1 vez			tiene que que con politicas
 	Aclaro que pido que esté sensibilizados, no necesariamente que se haya disparado, porque eso es tema de política
 
 20) Acotado el número de tokerns en todos los marcados						Hecho pero con mi test P Invariante, lo modifico al toqke sino
 
-22) Que coincida la transición con la qu un hilo se durmió con la transición a disparar			No hecho
+22) Que coincida la transición con la qu un hilo se durmió con la transición a disparar			HECHO con verificar Transicion Dormida
 	Fijarse en el contador del hilo y que coincida con lo de VectorEncolado 
