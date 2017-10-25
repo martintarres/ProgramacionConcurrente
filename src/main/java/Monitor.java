@@ -23,15 +23,16 @@ public class Monitor {
     private int m;
     private Hilo hiloDesencolado;
     private Log log;
-    private int piezaA;
-    private int piezaB;
-    private int piezaC;
+    //private int piezaA;
+    //private int piezaB;
+    //private int piezaC;
     private boolean cambio;
     private Politica politica;
     private int MaxBuffer;
     //private List<Object>
+    private ListasDeDisparos listasDeDisparos;
 
-    public Monitor(Constantes constantes) {
+    public Monitor(Constantes constantes, ListasDeDisparos listasDeDisparos) {
         try {
             mutex = new Semaforo(1, true);
             k = true;
@@ -49,13 +50,16 @@ public class Monitor {
 
             Vc = new ArrayList<Hilo>();
 
-            this.piezaA = 0;
-            this.piezaB = 0;
-            this.piezaC = 0;
+            //this.piezaA = 0;
+            //this.piezaB = 0;
+            //this.piezaC = 0;
             this.cambio = false;
-            this.politica = new PoliticaRandom(mapa);
+            this.listasDeDisparos = listasDeDisparos;
+            this.politica = new PoliticaRandom(mapa,listasDeDisparos);
             m = 0;
             this.MaxBuffer = 9;
+
+
 
 
             this.log = new Log("C:\\Users\\alexa\\Desktop\\CONCURRENTE\\ProgramacionConcurrente\\marcados.txt",
@@ -104,15 +108,15 @@ public class Monitor {
 
                     cambio = false;
                     if (transicion == 9) {
-                        piezaA++;
+                        politica.PiezaA++;
                         cambio = true;
                     }
                     if (transicion == 13) {
-                        piezaB++;
+                        politica.PiezaB++;
                         cambio = true;
                     }
                     if (transicion == 19) {
-                        piezaC++;
+                        politica.PiezaC++;
                         cambio = true;
                     }
                     this.log.escribir("------------------------------------------------------------------------------------------------------------------", log.getRegistro());
@@ -120,7 +124,7 @@ public class Monitor {
                     this.log.escribir(((Hilo) (Thread.currentThread())).getNombre() + " ha disparado la transicion  : " + traducirDisparo(transicion), log.getRegistro());
                     //this.log.escribir("Contador "+ this.getPetri().contador,log.getRegistro());
                     if (cambio) {
-                        this.log.escribir("Cantidad de piezas producidas:  " + "A = " + piezaA + "   B = " + piezaB + "   C = " + piezaC, log.getRegistro());
+                        this.log.escribir("Cantidad de piezas producidas:  " + "A = " + politica.PiezaA + "   B = " + politica.PiezaB + "   C = " + politica.PiezaC, log.getRegistro());
                     }
                     cambio = false;
 
@@ -369,6 +373,7 @@ public class Monitor {
         else return true;
 */
     }
+
 
     public void setearAntPost() {
         for (Hilo h : this.mapa.values()) {

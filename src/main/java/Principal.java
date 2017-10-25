@@ -6,8 +6,9 @@ public class Principal {
     public static void main (String[] args){
 
         Constantes constantes= new Constantes();
+        ListasDeDisparos listas =  new ListasDeDisparos();
 
-        Monitor monitor= new Monitor(constantes);
+        Monitor monitor= new Monitor(constantes,listas);
         System.out.println("Marcado Actual: ");
         // SOLO LA TRANSPONGO PARA QUE SE IMPRIMI EN UNA LINEA
         monitor.getPetri().marcadoActual().transpuesta().imprimir();
@@ -16,7 +17,7 @@ public class Principal {
         System.out.println("Matriz P Invariantes: ");
         monitor.getPetri().getMInvariantes().imprimir();
 
-       ListasDeDisparos listas =  new ListasDeDisparos();
+
 
 
         Hilo h1 = new Hilo("Hilo 1",listas.l1, monitor);

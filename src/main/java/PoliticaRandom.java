@@ -7,8 +7,9 @@ import java.util.Map;
  */
 public class PoliticaRandom extends Politica{
 
-    public PoliticaRandom(Map<Integer,Hilo> mapa){
-        super(mapa);
+    public PoliticaRandom(Map<Integer,Hilo> mapa,ListasDeDisparos listasDeDisparos){
+        super(mapa,listasDeDisparos);
+
     }
 
     public Integer getLock(Matriz VectorAnd){
@@ -20,9 +21,12 @@ public class PoliticaRandom extends Politica{
 
         }
         int  entero =  lista.get((int)(Math.random()*lista.size()));
+
         return getInteger(entero);
 
 
     }
+
+
 
 }
