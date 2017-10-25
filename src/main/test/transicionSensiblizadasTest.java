@@ -15,7 +15,9 @@ public class transicionSensiblizadasTest {
     public void testSensibilizadasPositivo(){
 
         constantes= new Constantes();
-        monitor=new Monitor(constantes);
+        ListasDeDisparos listas = new ListasDeDisparos();
+        monitor = new Monitor(constantes,listas);
+
 
         int transiciones[] = {0,1,3};
 
@@ -47,7 +49,8 @@ public class transicionSensiblizadasTest {
     @Test
     public void testSensibilizadasNegativo(){
         constantes= new Constantes();
-        monitor=new Monitor(constantes);
+        ListasDeDisparos listas = new ListasDeDisparos();
+        monitor = new Monitor(constantes,listas);
         Matriz vectorSensibilizadasOriginal;
 
         int transiciones[] = {4,9,12};

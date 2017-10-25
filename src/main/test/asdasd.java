@@ -89,7 +89,9 @@ public class asdasd {
 
 
             constantes= new Constantes();
-            monitor=new Monitor(constantes);
+            ListasDeDisparos listas = new ListasDeDisparos();
+            monitor = new Monitor(constantes,listas);
+
 
             System.out.println("voy a mostrar marcado actual");
             monitor.petri.marcadoActual().imprimir();
