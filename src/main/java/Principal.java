@@ -8,7 +8,7 @@ public class Principal {
         Constantes constantes= new Constantes();
         ListasDeDisparos listas =  new ListasDeDisparos();
 
-        Monitor monitor= new Monitor(constantes,listas);
+        Monitor monitor= new Monitor(constantes);
         System.out.println("Marcado Actual: ");
         // SOLO LA TRANSPONGO PARA QUE SE IMPRIMI EN UNA LINEA
         monitor.getPetri().marcadoActual().transpuesta().imprimir();

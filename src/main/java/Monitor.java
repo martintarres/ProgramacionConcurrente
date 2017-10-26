@@ -32,7 +32,7 @@ public class Monitor {
     //private List<Object>
     private ListasDeDisparos listasDeDisparos;
 
-    public Monitor(Constantes constantes, ListasDeDisparos listasDeDisparos) {
+    public Monitor(Constantes constantes) {
         try {
             mutex = new Semaforo(1, true);
             k = true;
@@ -55,7 +55,8 @@ public class Monitor {
             //this.piezaC = 0;
             this.cambio = false;
             this.listasDeDisparos = listasDeDisparos;
-            this.politica = new PoliticaRandom(mapa,listasDeDisparos);
+            //this.politica = new PoliticaRandom(mapa,listasDeDisparos);
+            this.politica = new PoliticaBardo(mapa);
             m = 0;
             this.MaxBuffer = 9;
 

@@ -17,8 +17,8 @@ public class TInvarianteTest {
     public void Inicializacion(){
         // CADA VEZ QUE CORRA UN TEST LO RECONSTRUYO POR LAS DUDAS
         constante =  new Constantes();
-        ListasDeDisparos listas = new ListasDeDisparos();
-        monitor = new Monitor(constante,listas);
+
+        monitor = new Monitor(constante);
         listas = new ListasDeDisparos();
 
 

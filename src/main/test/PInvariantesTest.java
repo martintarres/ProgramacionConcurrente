@@ -27,8 +27,7 @@ public class PInvariantesTest {
         //this.fin=fin;
 
         constantes = new Constantes();
-        ListasDeDisparos listas = new ListasDeDisparos();
-        monitor = new Monitor(constantes,listas);
+        monitor = new Monitor(constantes);
 
         int disparo=-1;    /// es valor con el que voy a pedir dispare (estaria bueno ponerle un nunero aleatorio)
 

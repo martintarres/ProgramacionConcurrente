@@ -29,9 +29,8 @@ public class PInvarianteTest {
 
         }
         Constantes constantes = new Constantes();
-        ListasDeDisparos listas = new ListasDeDisparos();
 
-        Monitor monitor = new Monitor(constantes,listas);
+        Monitor monitor = new Monitor(constantes);
         for (int i = 0; i < Marcados.size(); i++) {
             if(!monitor.getPetri().verificarMarcado(Marcados.get(i)))
             throw new Exception("Marcado inválido en línea : " +i);

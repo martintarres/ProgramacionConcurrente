@@ -7,8 +7,8 @@ import java.util.Map;
  */
 public class PoliticaRandom extends Politica{
 
-    public PoliticaRandom(Map<Integer,Hilo> mapa,ListasDeDisparos listasDeDisparos){
-        super(mapa,listasDeDisparos);
+    public PoliticaRandom(Map<Integer,Hilo> mapa){
+        super(mapa);
 
     }
 

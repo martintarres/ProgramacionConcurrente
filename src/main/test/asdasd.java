@@ -89,8 +89,7 @@ public class asdasd {
 
 
             constantes= new Constantes();
-            ListasDeDisparos listas = new ListasDeDisparos();
-            monitor = new Monitor(constantes,listas);
+            monitor = new Monitor(constantes);
 
 
             System.out.println("voy a mostrar marcado actual");
